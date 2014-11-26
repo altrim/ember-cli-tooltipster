@@ -10,14 +10,14 @@ The component supports only the basic options. Pull requests are welcome.
 # install via npm
 $ npm install ember-cli-tooltipster --save-dev
 # run blueprint to fetch dependencies
-$ ember g ember-cli-datepicker
+$ ember g ember-cli-tooltipster
 ```
 
 
 ## Basic Usage
 
 ```handlebars
-  {{#tool-tipster title="This is my div's tooltip message!" position="right"}} 
+  {{#tool-tipster title="This is my div's tooltip message!"}} 
     This div has a tooltip when you hover over it! 
   {{/tool-tipster}}
 ```
