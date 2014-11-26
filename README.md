@@ -22,6 +22,14 @@ $ ember g ember-cli-tooltipster
   {{/tool-tipster}}
 ```
 
+with options
+
+```handlebars
+  {{#tool-tipster title="This is my div's tooltip message!" triggerEvent="click" position="right"}} 
+    This div has a tooltip on the right when you click it! 
+  {{/tool-tipster}}
+```
+
 ## Options
 
 When using tooltipster, the following options are available: 
