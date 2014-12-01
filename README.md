@@ -52,7 +52,7 @@ Available Options: `[fade, grow, swing, slide, fall]`
 
 ### delay
 Type: `Number`
-Default: `200`
+Default: `300`
 
 Delay how long it takes (in milliseconds) for the tooltip to start animating in.
 
