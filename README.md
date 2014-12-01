@@ -22,13 +22,41 @@ $ ember g ember-cli-tooltipster
   {{/tool-tipster}}
 ```
 
-with options
+**with options**
 
 ```handlebars
   {{#tool-tipster title="This is my div's tooltip message!" triggerEvent="click" position="right"}} 
     This div has a tooltip on the right when you click it! 
   {{/tool-tipster}}
 ```
+
+**extending the component**
+
+You can also easily extend the component to modify it to your needs (e.g a button component)
+
+Just import `TooltipsterComponent` into your component and extend it
+
+```javascript
+//components/my-button.js
+import TooltipsterComponent from 'ember-cli-tooltipster/components/tool-tipster';
+
+export default TooltipsterComponent.extend({
+    tagName: 'button',
+  
+    classNames: ['my-button-class'],
+    // define properties
+  title: 'My tooltip',
+    
+    position: 'left'
+});
+```
+Then in your template.
+
+
+```handlebars
+{{#my-button}} Tooltip Button {{/my-button}}
+```
+That's it now your button will have a nice tooltip on the left.
 
 ## Options
 
