@@ -5,6 +5,10 @@ export default Ember.Component.extend({
   classNameBindings: ['tooltip'],
 
   attributeBindings: ['title'],
+  
+  updateTitle: Ember.observer('title', function () {
+    this.$().tooltipster('content', this.get('title'));
+  }),
 
     /**
      * Set the position of the tooltip.
