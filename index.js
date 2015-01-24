@@ -1,3 +1,4 @@
+/* jshint node: true */
 'use strict';
 
 module.exports = {
@@ -6,7 +7,7 @@ module.exports = {
     included: function(app) {
         this._super.included(app);
 
-        app.import('bower_components/tooltipster/js/jquery.tooltipster.min.js');
-        app.import('bower_components/tooltipster/css/tooltipster.css');
+        app.import(app.bowerDirectory + '/tooltipster/js/jquery.tooltipster.min.js');
+        app.import(app.bowerDirectory + '/tooltipster/css/tooltipster.css');
     }
 };
