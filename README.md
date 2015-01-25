@@ -64,14 +64,30 @@ When using tooltipster, the following options are available:
 
 #### position
 Type: `String`
+
 Default: `top`
 
 Set the position of the tooltip.
 
 Available options: `[right, left, top, top-right, top-left, bottom, bottom-right, bottom-left]`
 
+###offsetX
+Type: `Number`
+
+Default: 0
+
+Offsets the tooltip (in pixels) farther left/right from the origin.
+
+###offsetY
+Type: `Number`
+
+Default: 0
+
+Offsets the tooltip (in pixels) farther up/down from the origin.
+
 #### animation
 Type: `String`
+
 Default: `fade`
 
 Determines how the tooltip will animate in and out.
@@ -80,21 +96,53 @@ Available Options: `[fade, grow, swing, slide, fall]`
 
 ### delay
 Type: `Number`
+
 Default: `300`
 
 Delay how long it takes (in milliseconds) for the tooltip to start animating in.
 
 #### theme
-Type: `String`
+Type: `String` (CSS class)
+
 Default: `tooltipster-default`
 
 Set the theme used for your tooltip. 
 
 ###triggerEvent
 Type: `String`
-Default: 'hover'
+
+Default: `hover`
 
 Set how tooltips should be activated and closed.
 
 Available options: `[hover, click]`
+
+###arrow
+Type: `Boolean`
+
+Default: `true`
+
+Adds the "speech bubble arrow" to the tooltip.
+
+###minWidth
+Type: `Number`
+
+Default: `0` (auto width)
+
+Set a minimum width for the tooltip.
+
+###maxWidth
+Type: `Number`
+
+Default `null` (no max width)
+
+Set a maximum width for the tooltip.
+
+###timer
+Type: `Number`
+
+Default: `0` (disabled)
+
+How long the tooltip should be allowed to live before closing.
+
 
