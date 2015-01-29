@@ -22,7 +22,7 @@ $ ember g ember-cli-tooltipster
   {{/tool-tipster}}
 ```
 
-**with options**
+###with options
 
 ```handlebars
   {{#tool-tipster title="This is my div's tooltip message!" triggerEvent="click" position="right"}} 
@@ -30,7 +30,7 @@ $ ember g ember-cli-tooltipster
   {{/tool-tipster}}
 ```
 
-**extending the component**
+### <a name="extend"></a> extending the component
 
 You can also easily extend the component to modify it to your needs (e.g a button component)
 
@@ -44,10 +44,16 @@ export default TooltipsterComponent.extend({
     tagName: 'button',
   
     classNames: ['my-button-class'],
-    // define properties
-  title: 'My tooltip',
     
-    position: 'left'
+    // define properties
+    title: 'My tooltip',
+    
+    position: 'left',
+    
+    // example using one of the advanced options - check docs below
+    functionInit: function(origin, content) {
+      return "this value will become the content of the tooltip";
+    }
 });
 ```
 Then in your template.
@@ -145,4 +151,35 @@ Default: `0` (disabled)
 
 How long the tooltip should be allowed to live before closing.
 
+## Advanced Options
+
+To be able to use the advanced options you need to [extend the component](#extend) and implement the functions. For more information check the examples on [Tooltipster Docs](http://iamceege.github.io/tooltipster/#options)
+
+###functionInit
+Type: `Function`
+
+Default: `function(origin, content) {}`
+
+Create a custom function to be fired only once at instantiation. If the function returns a value, this value will become the content of the tooltip
+
+###functionBefore
+Type: `Function`
+
+Default: `function(origin, continueTooltip) { continueTooltip(); }`
+
+Create a custom function to be fired before the tooltip opens. This function may prevent or hold off the opening. 
+
+###functionReady
+Type: `Function`
+
+Default: `function(origin, tooltip) {}`
+
+Create a custom function to be fired when the tooltip and its contents have been added to the DOM.
+
+###functionAfter
+Type: `Function`
+
+Default: `function(origin) {}`
+
+Create a custom function to be fired once the tooltip has been closed and removed from the DOM.
 
