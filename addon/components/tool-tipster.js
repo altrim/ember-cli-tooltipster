@@ -10,6 +10,10 @@ export default Ember.Component.extend({
         this.$().tooltipster('content', this.get('title'));
     }),
 
+    updateContent: Ember.observer('content', function(){
+      this.$().tooltipster('content', this.get('content'));
+    }),
+
     /**
      * Set how tooltips should be activated and closed.
      * Default: 'hover'
@@ -18,8 +22,9 @@ export default Ember.Component.extend({
      */
     triggerEvent: 'hover',
 
-    tooltipsterOptions: ['position', 'offsetX', 'offsetY', 'animation', 'delay', 'theme',
-        'arrow', 'minWidth', 'maxWidth', 'timer'
+    tooltipsterOptions: ['animation', 'arrow', 'arrowColor', 'content', 'contentAsHTML', 'debug', 'delay',
+        'minWidth', 'maxWidth', 'offsetX', 'offsetY', 'position', 'positionTracker', 'speed', 'timer', 'theme',
+        'updateAnimation'
     ],
 
     _initializeTooltipster: function() {
@@ -37,6 +42,7 @@ export default Ember.Component.extend({
         options.functionBefore = Ember.$.proxy(this.functionBefore, this);
         options.functionReady = Ember.$.proxy(this.functionReady, this);
         options.functionAfter = Ember.$.proxy(this.functionAfter, this);
+        options.positionTrackerCallback = Ember.$.proxy(this.positionTrackerCallback, this);
 
         this.$().tooltipster(options);
 
