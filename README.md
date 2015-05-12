@@ -119,6 +119,13 @@ Default: `300`
 
 Delay how long it takes (in milliseconds) for the tooltip to start animating in.
 
+### interactive
+Type: `Boolean`
+
+Default: `false`
+
+Enable access of intractive content on hover.
+
 ### minWidth
 Type: `Number`
 
