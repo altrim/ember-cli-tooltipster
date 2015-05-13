@@ -22,7 +22,7 @@ export default Ember.Component.extend({
      */
     triggerEvent: 'hover',
 
-    tooltipsterOptions: ['animation', 'arrow', 'arrowColor', 'content', 'contentAsHTML', 'debug', 'delay',
+    tooltipsterOptions: ['animation', 'arrow', 'arrowColor', 'content', 'contentAsHTML', 'debug', 'delay', 'interactive',
         'minWidth', 'maxWidth', 'offsetX', 'offsetY', 'position', 'positionTracker', 'speed', 'timer', 'theme',
         'updateAnimation'
     ],
