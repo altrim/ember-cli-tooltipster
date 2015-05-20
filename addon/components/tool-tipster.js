@@ -7,11 +7,15 @@ export default Ember.Component.extend({
     attributeBindings: ['title'],
 
     updateTitle: Ember.observer('title', function() {
+      Ember.run.schedule('afterRender', this, function() {
         this.$().tooltipster('content', this.get('title'));
+      });
     }),
 
     updateContent: Ember.observer('content', function(){
-      this.$().tooltipster('content', this.get('content'));
+      Ember.run.schedule('afterRender', this, function() {
+        this.$().tooltipster('content', this.get('content'));
+      });
     }),
 
     /**
