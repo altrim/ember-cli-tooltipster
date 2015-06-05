@@ -31,7 +31,7 @@ export default Ember.Component.extend({
         'updateAnimation'
     ],
 
-    _initializeTooltipster: function() {
+    _initializeTooltipster: Ember.on('didInsertElement', function() {
         var _this = this;
         var options = {};
 
@@ -50,9 +50,9 @@ export default Ember.Component.extend({
 
         this.$().tooltipster(options);
 
-    }.on('didInsertElement'),
+    }),
 
-    _destroyTooltipster: function() {
+    _destroyTooltipster: Ember.on('willDestroyElement', function() {
         this.$().tooltipster('destroy');
-    }.on('willDestroyElement'),
+    }),
 });
