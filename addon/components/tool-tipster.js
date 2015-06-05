@@ -55,4 +55,22 @@ export default Ember.Component.extend({
     _destroyTooltipster: function() {
         this.$().tooltipster('destroy');
     }.on('willDestroyElement'),
+
+    /**
+    * Send action ´open´ when open info
+    *
+    * @method functionBefore
+    **/
+    functionBefore: function(origin, continueTooltip) {
+        this.sendAction('open', continueTooltip);
+    },
+
+    /**
+    * Send action close when close info
+    *
+    * @method functionBefore
+    **/
+    functionAfter: function(origin) {
+        this.sendAction('close');
+    },
 });
