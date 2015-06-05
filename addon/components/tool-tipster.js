@@ -61,8 +61,8 @@ export default Ember.Component.extend({
     *
     * @method functionBefore
     **/
-    functionBefore: function(origin, continueTooltip) {
-        this.sendAction('open', continueTooltip);
+    functionReady: function(origin, tooltip) {
+        this.sendAction('open', tooltip);
     },
 
     /**
