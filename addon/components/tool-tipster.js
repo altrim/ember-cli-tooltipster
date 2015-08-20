@@ -1,5 +1,21 @@
 import Ember from 'ember';
 
+/*
+ * Only calls fn if component is inDOM. Furthermore, binds fn to fnContext
+ */
+var callIfInDom = function(component, fn, fnContext) {
+  // If fn does not exist, return the same fn value so tooltipster default
+  // callback takes effect.
+  if ( !fn ) { return fn; }
+  var _this = fnContext || component;
+  var callback = fn || Ember.K;
+  return function() {
+    if (component._state === 'inDOM') {
+      callback.apply(_this, arguments);
+    }
+  };
+};
+
 export default Ember.Component.extend({
 
     classNameBindings: ['tooltip'],
@@ -42,11 +58,11 @@ export default Ember.Component.extend({
         });
 
         options.trigger = _this.get('triggerEvent');
-        options.functionInit = Ember.$.proxy(this.functionInit, this);
-        options.functionBefore = Ember.$.proxy(this.functionBefore, this);
-        options.functionReady = Ember.$.proxy(this.functionReady, this);
-        options.functionAfter = Ember.$.proxy(this.functionAfter, this);
-        options.positionTrackerCallback = Ember.$.proxy(this.positionTrackerCallback, this);
+        options.functionInit = callIfInDom(this, this.functionInit, this);
+        options.functionBefore = callIfInDom(this, this.functionBefore, this);
+        options.functionReady = callIfInDom(this, this.functionReady, this);
+        options.functionAfter = callIfInDom(this, this.functionAfter, this);
+        options.positionTrackerCallback = callIfInDom(this, this.positionTrackerCallback, this);
 
         this.$().tooltipster(options);
 
