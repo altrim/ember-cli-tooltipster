@@ -7,10 +7,7 @@ The component supports only the basic options. Pull requests are welcome.
 
 
 ```sh
-# install via npm
-$ npm install ember-cli-tooltipster --save-dev
-# run blueprint to fetch dependencies
-$ ember g ember-cli-tooltipster
+ember install ember-cli-tooltipster
 ```
 
 

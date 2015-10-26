@@ -7,15 +7,15 @@ export default Ember.Component.extend({
     attributeBindings: ['title'],
 
     updateTitle: Ember.observer('title', function() {
-      Ember.run.schedule('afterRender', this, function() {
-        this.$().tooltipster('content', this.get('title'));
-      });
+        Ember.run.schedule('afterRender', this, function() {
+            this.$().tooltipster('content', this.get('title'));
+        });
     }),
 
-    updateContent: Ember.observer('content', function(){
-      Ember.run.schedule('afterRender', this, function() {
-        this.$().tooltipster('content', this.get('content'));
-      });
+    updateContent: Ember.observer('content', function() {
+        Ember.run.schedule('afterRender', this, function() {
+            this.$().tooltipster('content', this.get('content'));
+        });
     }),
 
     /**
@@ -56,20 +56,20 @@ export default Ember.Component.extend({
         this.$().tooltipster('destroy');
     }),
     /**
-    * Send action ´open´ when open info
-    *
-    * @method functionBefore
-    **/
+     * Send action ´open´ when open info
+     *
+     * @method functionBefore
+     **/
     functionReady: function(origin, tooltip) {
         this.sendAction('open', tooltip);
     },
 
     /**
-    * Send action close when close info
-    *
-    * @method functionBefore
-    **/
-    functionAfter: function(/*origin*/) {
+     * Send action close when close info
+     *
+     * @method functionBefore
+     **/
+    functionAfter: function( /*origin*/ ) {
         this.sendAction('close');
     }
 });
