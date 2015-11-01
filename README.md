@@ -1,33 +1,33 @@
 # Ember CLI Tooltipster
 
-An Ember CLI add-on that wraps [Tooltipster](http://iamceege.github.io/tooltipster/) into an ember component. 
-The component supports only the basic options. Pull requests are welcome.
+An Ember CLI add-on that wraps [Tooltipster](http://iamceege.github.io/tooltipster/) into an ember component.
+The component supports most of [Tooltipster](http://iamceege.github.io/tooltipster/) features.
+
+[Demo](http://altrim.github.io/ember-cli-tooltipster/)
 
 ## Installation
-
 
 ```sh
 ember install ember-cli-tooltipster
 ```
 
-
 ## Basic Usage
 
 ```handlebars
-  {{#tool-tipster title="This is my div's tooltip message!"}} 
+  {{#tool-tipster title="This is my tooltip message!"}} 
     This div has a tooltip when you hover over it! 
   {{/tool-tipster}}
 ```
 
-###with options
+### With options
 
 ```handlebars
-  {{#tool-tipster title="This is my div's tooltip message!" triggerEvent="click" position="right"}} 
+  {{#tool-tipster title="This is my tooltip message!" triggerEvent="click" position="right"}} 
     This div has a tooltip on the right when you click it! 
   {{/tool-tipster}}
 ```
 
-### <a name="extend"></a> extending the component
+### Extending the component
 
 You can also easily extend the component to modify it to your needs (e.g a button component)
 
@@ -38,32 +38,28 @@ Just import `TooltipsterComponent` into your component and extend it
 import TooltipsterComponent from 'ember-cli-tooltipster/components/tool-tipster';
 
 export default TooltipsterComponent.extend({
-    tagName: 'button',
-  
-    classNames: ['my-button-class'],
-    
-    // define properties
-    title: 'My tooltip',
-    
-    position: 'left',
-    
-    // example using one of the advanced options - check docs below
-    functionInit: function(origin, content) {
-      return "this value will become the content of the tooltip";
-    }
+  tagName: 'button',
+
+  classNames: ['my-awesome-button'],
+
+  // define properties
+  content: 'My awesome tooltip button',
+
+  position: 'right',
+
+  timer: 2000 // set the timer to automatically close after 2 seconds
 });
 ```
 Then in your template.
 
-
 ```handlebars
 {{#my-button}} Tooltip Button {{/my-button}}
 ```
-That's it now your button will have a nice tooltip on the left.
+That's it, now your button will display a nice tooltip on the right that will automatically close after 2 seconds.
 
 ## Options
 
-When using tooltipster, the following options are available: 
+When using the component, the following options are available: 
 
 #### animation
 Type: `String`
@@ -87,6 +83,13 @@ Type:`hex code / rgb`
 Default: `will inherit the tooltip's background color`
 
 Select a specific color for the "speech bubble arrow".
+
+### autoClose
+Type: `Boolean`
+
+Default: `true`
+
+If autoClose is set to false, the tooltip will never close unless you call the 'hide' method yourself.
 
 ### content
 Type: `String, jQuery object`
@@ -198,9 +201,40 @@ Default: `true`
 
 If a tooltip is open while its content is updated, play a subtle animation when the content changes.
 
+### icon
+Type: `String, jQuery object`
+
+Default: `(?)`
+
+If using the iconDesktop or iconTouch options, this sets the content for your icon.
+
+### iconCloning
+Type: `Boolean`
+Default: `true`
+
+If you provide a jQuery object to the 'icon' option, this sets if it is a clone of this object that should actually be used.
+
+### iconDesktop
+Type: `Boolean`
+Default: `false`
+
+Generate an icon next to your content that is responsible for activating the tooltip on non-touch devices.
+
+### iconTouch
+Type: `Boolean`
+Default: `false`
+
+Generate an icon next to your content that is responsible for activating the tooltip on touch devices (tablets, phones, etc).
+
+### iconTheme
+Type: `CSS class`
+Default: `tooltipster-icon`
+
+If using the iconDesktop or iconTouch options, this sets the class on the icon (used to style the icon).
+
 ## Advanced Options
 
-To be able to use the advanced options you need to [extend the component](#extend) and implement the functions. For more information check the examples on [Tooltipster Docs](http://iamceege.github.io/tooltipster/#options)
+To be able to use the advanced options you need to [extend the component](#extending-the-component) and implement the functions. For more information check the examples on [Tooltipster Docs](http://iamceege.github.io/tooltipster/#options)
 
 ### functionInit
 Type: `Function`
