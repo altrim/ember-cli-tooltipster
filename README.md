@@ -15,15 +15,19 @@ ember install ember-cli-tooltipster
 
 ```handlebars
   {{#tool-tipster title="This is my tooltip message!"}} 
-    This div has a tooltip when you hover over it! 
+    Checkout my tooltip
   {{/tool-tipster}}
 ```
 
 ### With options
 
 ```handlebars
-  {{#tool-tipster title="This is my tooltip message!" triggerEvent="click" position="right"}} 
-    This div has a tooltip on the right when you click it! 
+  {{#tool-tipster 
+     title="This is my tooltip message!" 
+     triggerEvent="click" 
+     position="right"
+   }} 
+   The tooltip is displayed on the right when you click it!
   {{/tool-tipster}}
 ```
 
@@ -57,7 +61,40 @@ Then in your template.
 ```
 That's it, now your button will display a nice tooltip on the right that will automatically close after 2 seconds.
 
-## Options
+## Themes
+
+Besides the default theme [four other themes](http://iamceege.github.io/tooltipster/#themes) are available that you can use for your tooltip.
+
+By default the themes are `not included` when you install the addon. 
+
+To include the desired theme you need to set the corresponding setting in your build file.
+
+```javascript
+//ember-cli-build.js
+
+/* global require, module */
+var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+module.exports = function(defaults) {
+  var app = new EmberApp(defaults, {
+    'ember-cli-tooltipster': {
+      importTooltipsterPunk: true
+    }
+  });
+
+  return app.toTree();
+};
+```
+Available Settings
+
+```javascript
+importTooltipsterLight:  false,
+importTooltipsterNoir:   false,
+importTooltipsterPunk:   false,
+importTooltipsterShadow: false
+```
+
+## Available Options
 
 When using the component, the following options are available: 
 
@@ -234,7 +271,7 @@ If using the iconDesktop or iconTouch options, this sets the class on the icon (
 
 ## Advanced Options
 
-To be able to use the advanced options you need to [extend the component](#extending-the-component) and implement the functions. For more information check the examples on [Tooltipster Docs](http://iamceege.github.io/tooltipster/#options)
+In order to use the advanced options you need to [extend the component](#extending-the-component) and implement the functions. For more information check the examples on [Tooltipster Docs](http://iamceege.github.io/tooltipster/#options)
 
 ### functionInit
 Type: `Function`
