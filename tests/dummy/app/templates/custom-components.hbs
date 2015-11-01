@@ -1,0 +1,33 @@
+{{#paper-content flex=true scroll-y=true layout-padding=true}}
+<h2>Extending the component</h2>
+<p>
+  Following example shows how to extend the Tooltipster component to create your own button.
+</p>
+
+<h4>Demo</h4>
+{{#my-button hide=tooltip closeTooltip='closeTooltip'}} Tooltipster button {{/my-button}}
+
+<h4>Component</h4>
+{{#code-block language='javascript'}}
+//components/my-button.js
+import TooltipsterComponent from 'ember-cli-tooltipster/components/tool-tipster';
+
+  export default TooltipsterComponent.extend({
+
+  tagName: 'button',
+
+  classNames: ['my-awesome-button'],
+
+  // define properties
+  content: 'My awesome tooltip',
+
+  position: 'right',
+
+  timer: 2000 // tooltip will close automatically after 2 seconds
+});
+{{/code-block}}
+
+<h4>Template</h4>
+{{#code-block language='handlebars'}}\{{#my-button}}Tooltipster button\{{/my-button}}{{/code-block}}
+
+{{/paper-content}}

@@ -6,6 +6,8 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('custom-components');
+  this.route('advanced-options');
 });
 
 export default Router;

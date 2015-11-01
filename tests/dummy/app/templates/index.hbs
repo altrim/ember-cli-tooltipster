@@ -1,0 +1,121 @@
+<ul id="demos">
+  <li>
+    {{#tool-tipster title="This is a tooltip"}}
+    Hover
+    {{/tool-tipster}}
+    <p>
+      Default settings
+    </p>
+  </li>
+
+  <li>
+  {{#tool-tipster
+    content="Try clicking <a href='https://www.google.com'>this link</a>"
+    contentAsHTML=true
+    interactive=true
+    theme="tooltipster-simple"
+
+    }}
+    Hover
+    {{/tool-tipster}}
+    <p>
+      Interaction with tooltips
+    </p>
+  </li>
+
+  <li>
+    {{#tool-tipster title="Custom theme & animation" theme="tooltipster-punk" animation="grow"}}
+    Hover
+    {{/tool-tipster}}
+    <p>
+      Custom themes & animations
+    </p>
+  </li>
+
+  <li>
+    {{#tool-tipster
+    content="<img src='http://lorempixel.com/45/45/abstract/' width='50' height='50' style='float:left;margin:0 5px 0 0;'/><p style='text-align:left;'><strong>Neque porro quisquam est Qui.</strong> Dolorem ipsum quia dolor sit amet.</p>"
+    contentAsHTML=true
+    position="right"
+    minWidth=300
+    maxWidth=300
+  }}
+  Hover
+  {{/tool-tipster}}
+  <p>
+    Fixed width, position, & HTML
+  </p>
+</li>
+
+<li>
+  {{#tool-tipster title="Fade tooltip on the right" theme="tooltipster-punk" animation="fade" position="right"}}
+  Hover
+  {{/tool-tipster}}
+  <p>
+    Fade
+  </p>
+</li>
+
+<li>
+  {{#tool-tipster title="Grow tooltip on the left" theme="tooltipster-light" animation="grow" position="left"}}
+  Hover
+  {{/tool-tipster}}
+  <p>
+    Grow
+  </p>
+</li>
+
+<li>
+  {{#tool-tipster title="Swing tooltip on bottom" theme="tooltipster-noir" animation="swing" position="bottom"}}
+  Hover
+  {{/tool-tipster}}
+  <p>
+    Swing
+  </p>
+</li>
+
+<li>
+  {{#tool-tipster title="Slide tooltip" theme="tooltipster-shadow" animation="slide" position="top-right"}}
+  Hover
+  {{/tool-tipster}}
+  <p>
+    Slide
+  </p>
+</li>
+
+<li>
+  {{#tool-tipster title="Fall tooltip" theme="tooltipster-simple" animation="Fall" position="bottom-right"}}
+  Hover
+  {{/tool-tipster}}
+  <p>
+    Fall
+  </p>
+</li>
+
+<li>
+  {{#tool-tipster title="Timed tooltip - will close after 2 seconds" theme="tooltipster-simple" timer=2000}}
+  Hover
+  {{/tool-tipster}}
+  <p>
+    With timer (auto closes)
+  </p>
+</li>
+
+<li>
+  {{#tool-tipster title="Show/hide on click" triggerEvent="click"}}
+  Click
+  {{/tool-tipster}}
+  <p>
+    Trigger on click
+  </p>
+</li>
+<li>
+  {{#tool-tipster title="Use separate icons to launch your tooltips on either desktops or touch devices - or both!" iconDesktop=true iconTouch=true}}
+  Hover on icon
+  {{/tool-tipster}}
+  <p>
+    Attach tooltips to icons
+  </p>
+</li>
+
+</ul>
