@@ -1,132 +1,140 @@
 import Ember from 'ember';
 
+const {
+	run,
+	observer,
+	on,
+	isEmpty,
+	$
+} = Ember;
+
 export default Ember.Component.extend({
 
-  attributeBindings: ['title'],
+	attributeBindings: ['title'],
 
-  updateTitle: Ember.observer('title', function() {
-    Ember.run.schedule('afterRender', this, () => {
-      this.$().tooltipster('content', this.get('title'));
-    });
-  }),
+	/**
+	 * Set how tooltips should be activated and closed.
+	 * Default: 'hover'
+	 * Options: [hover, click]
+	 * @type {String}
+	 */
+	triggerEvent: 'hover',
 
-  updateContent: Ember.observer('content', function() {
-    Ember.run.schedule('afterRender', this, () => {
-      this.$().tooltipster('content', this.get('content'));
-    });
-  }),
+	tooltipsterOptions: [
+		'animation',
+		'arrow',
+		'arrowColor',
+		'content',
+		'contentAsHTML',
+		'debug',
+		'delay',
+		'interactive',
+		'minWidth',
+		'maxWidth',
+		'offsetX',
+		'offsetY',
+		'position',
+		'positionTracker',
+		'speed',
+		'timer',
+		'theme',
+		'updateAnimation',
+		'autoClose',
+		'icon',
+		'iconCloning',
+		'iconDesktop',
+		'iconTouch',
+		'iconTheme'
+	],
 
-  /**
-   * Hide tooltip manually.
-   * Send action `onTooltipHide` when the tooltip is fully closed.
-   *
-   * Please note that if the show/hide action is somehow cancelled before it has completed its animation,
-   * the callback function will never be called.
-   */
-  hideTooltip: Ember.observer('hide', function() {
-    const hide = this.get('hide');
-    if (hide) {
-      Ember.run.once(this, () => {
-        this.$().tooltipster('hide', () => {
-          this.sendAction('onTooltipHide');
-        });
-      });
-    }
-  }),
+	_initializeTooltipster: on('didInsertElement', function() {
+		let options = {};
 
-  /**
-   * Show tooltip manually.
-   * Send action `onTooltipShow` when the tooltip is fully open.
-   *
-   * Please note that if the show/hide action is somehow cancelled before it has completed its animation,
-   * the callback function will never be called.
-   */
-  showTooltip: Ember.observer('show', function() {
-    const show = this.get('show');
-    if (show) {
-      Ember.run.once(this, () => {
-        this.$().tooltipster('show', () => {
-          this.sendAction('onTooltipShow');
-        });
-      });
-    }
-  }),
+		this.get('tooltipsterOptions').forEach((item) => {
+			if (!isEmpty(this.get(item))) {
+				options[item] = this.get(item);
+			}
+		});
 
-  /**
-   * Set how tooltips should be activated and closed.
-   * Default: 'hover'
-   * Options: [hover, click]
-   * @type {String}
-   */
-  triggerEvent: 'hover',
+		options.trigger = this.get('triggerEvent');
 
-  tooltipsterOptions: [
-    'animation',
-    'arrow',
-    'arrowColor',
-    'content',
-    'contentAsHTML',
-    'debug',
-    'delay',
-    'interactive',
-    'minWidth',
-    'maxWidth',
-    'offsetX',
-    'offsetY',
-    'position',
-    'positionTracker',
-    'speed',
-    'timer',
-    'theme',
-    'updateAnimation',
-    'autoClose',
-    'icon',
-    'iconCloning',
-    'iconDesktop',
-    'iconTouch',
-    'iconTheme'
-  ],
+		['functionInit', 'functionBefore', 'functionReady', 'functionAfter', 'positionTrackerCallback'].forEach(fn => {
+			options[fn] = $.proxy(this[fn], this);
+		});
 
-  _initializeTooltipster: Ember.on('didInsertElement', function() {
-    let options = {};
+		this.$().tooltipster(options);
+	}),
 
-    this.get('tooltipsterOptions').forEach((item) => {
-      if (!Ember.isEmpty(this.get(item))) {
-        options[item] = this.get(item);
-      }
-    });
+	_onTitleDidChange: observer('title', function() {
+		run.schedule('afterRender', this, () => {
+			this.$().tooltipster('content', this.get('title'));
+		});
+	}),
 
-    options.trigger = this.get('triggerEvent');
-    options.functionInit = Ember.$.proxy(this.functionInit, this);
-    options.functionBefore = Ember.$.proxy(this.functionBefore, this);
-    options.functionReady = Ember.$.proxy(this.functionReady, this);
-    options.functionAfter = Ember.$.proxy(this.functionAfter, this);
-    options.positionTrackerCallback = Ember.$.proxy(this.positionTrackerCallback, this);
+	_onContentDidChange: observer('content', function() {
+		run.schedule('afterRender', this, () => {
+			this.$().tooltipster('content', this.get('content'));
+		});
+	}),
 
-    this.$().tooltipster(options);
-  }),
+	/**
+	 * Hide tooltip manually.
+	 * Send action `onTooltipHide` when the tooltip is fully closed.
+	 *
+	 * Please note that if the show/hide action is somehow cancelled before it has completed its animation,
+	 * the callback function will never be called.
+	 */
+	_onTooltipHide: observer('hide', function() {
+		const hide = this.get('hide');
+		if (hide) {
+			run.once(this, () => {
+				this.$().tooltipster('hide', () => {
+					this.sendAction('onTooltipHide');
+				});
+			});
+		}
+	}),
 
-  _destroyTooltipster: Ember.on('willDestroyElement', function() {
-    if (this.$().data('tooltipster-ns')) {
-      this.$().tooltipster('destroy');
-    }
-  }),
+	/**
+	 * Show tooltip manually.
+	 * Send action `onTooltipShow` when the tooltip is fully open.
+	 *
+	 * Please note that if the show/hide action is somehow cancelled before it has completed its animation,
+	 * the callback function will never be called.
+	 */
+	_onTooltipShow: observer('show', function() {
+		const show = this.get('show');
+		if (show) {
+			run.once(this, () => {
+				this.$().tooltipster('show', () => {
+					this.sendAction('onTooltipShow');
+				});
+			});
+		}
+	}),
 
-  /**
-   * Send action `open` when the tooltip and its contents have been added to the DOM
-   *
-   * @method functionBefore
-   */
-  functionReady(origin, tooltip) {
-    this.sendAction('open', tooltip);
-  },
+	_destroyTooltipster: on('willDestroyElement', function() {
+		if (this.$().data('tooltipster-ns')) {
+			this.$().tooltipster('destroy');
+		}
+		this.$().off();
+	}),
 
-  /**
-   * Send action `close` once the tooltip has been closed and removed from the DOM
-   *
-   * @method functionBefore
-   */
-  functionAfter( /*origin*/ ) {
-    this.sendAction('close');
-  }
+	/**
+	 * Send action `open` when the tooltip and its contents have been added to the DOM
+	 *
+	 * @method functionBefore
+	 */
+	functionReady(origin, tooltip) {
+		this.sendAction('open', tooltip);
+	},
+
+	/**
+	 * Send action `close` once the tooltip has been closed and removed from the DOM
+	 *
+	 * @method functionBefore
+	 */
+	functionAfter( /*origin*/ ) {
+		this.sendAction('close');
+	}
 });
