@@ -5,7 +5,10 @@ const {
 	observer,
 	on,
 	isEmpty,
-	$
+	$,
+	Handlebars: {
+		SafeString
+	}
 } = Ember;
 
 export default Ember.Component.extend({
@@ -49,12 +52,18 @@ export default Ember.Component.extend({
 
 	_initializeTooltipster: on('didInsertElement', function() {
 		let options = {};
-
-		this.get('tooltipsterOptions').forEach((item) => {
-			if (!isEmpty(this.get(item))) {
-				options[item] = this.get(item);
+		let content = this.get('content') || this.get('title');
+    
+		this.get('tooltipsterOptions').forEach((option) => {
+			if (!isEmpty(this.get(option))) {
+				options[option] = this.get(option);
 			}
 		});
+
+		// Handle SafeString
+		if (content instanceof SafeString) {
+			options.content = content.toString();
+		}
 
 		options.trigger = this.get('triggerEvent');
 
@@ -65,15 +74,13 @@ export default Ember.Component.extend({
 		this.$().tooltipster(options);
 	}),
 
-	_onTitleDidChange: observer('title', function() {
-		run.schedule('afterRender', this, () => {
-			this.$().tooltipster('content', this.get('title'));
-		});
-	}),
-
-	_onContentDidChange: observer('content', function() {
-		run.schedule('afterRender', this, () => {
-			this.$().tooltipster('content', this.get('content'));
+	_onContentDidChange: observer('content', 'title', function() {
+		run.scheduleOnce('afterRender', this, () => {
+			let content = this.get('content') || this.get('title');
+			if (content instanceof SafeString) {
+				content = content.toString();
+			}
+			this.$().tooltipster('content', content);
 		});
 	}),
 
