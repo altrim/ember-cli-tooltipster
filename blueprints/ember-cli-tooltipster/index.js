@@ -1,8 +1,11 @@
 /*jshint node:true*/
 module.exports = {
-    description: 'ember-cli-tooltipster',
+	description: 'ember-cli-tooltipster',
+	normalizeEntityName: function() {
+		// this prevents an error when the entityName is not specified
+	},
 
-    afterInstall: function(options) {
-        return this.addBowerPackageToProject('tooltipster');
-    }
+	afterInstall: function(options) {
+		return this.addBowerPackageToProject('tooltipster');
+	}
 };
