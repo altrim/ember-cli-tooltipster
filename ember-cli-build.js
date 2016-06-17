@@ -13,8 +13,8 @@ module.exports = function(defaults) {
       behave. You most likely want to be modifying `./index.js` or app's build file
       */
 
-    app.import('bower_components/tooltipster/js/jquery.tooltipster.min.js');
-    app.import('bower_components/tooltipster/css/tooltipster.css');
+    app.import('bower_components/tooltipster/dist/js/tooltipster.bundle.min.js');
+    app.import('bower_components/tooltipster/dist/css/tooltipster.bundle.min.css');
 
     return app.toTree();
 };
