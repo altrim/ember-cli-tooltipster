@@ -3,7 +3,7 @@
 An Ember CLI add-on that wraps [Tooltipster](http://iamceege.github.io/tooltipster/) into an ember component.
 The component supports most of [Tooltipster](http://iamceege.github.io/tooltipster/) features.
 
-[Demo](http://altrim.github.io/ember-cli-tooltipster/)
+[DEMO](http://altrim.github.io/ember-cli-tooltipster/)
 
 ## Installation
 
@@ -23,9 +23,9 @@ ember install ember-cli-tooltipster
 
 ```handlebars
   {{#tool-tipster 
-     title="This is my tooltip message!" 
+     content="This is my tooltip message!" 
      triggerEvent="click" 
-     position="right"
+     side="right"
    }} 
    The tooltip is displayed on the right when you click it!
   {{/tool-tipster}}
@@ -49,7 +49,7 @@ export default TooltipsterComponent.extend({
   // define properties
   content: 'My awesome tooltip button',
 
-  position: 'right',
+  side: 'right',
 
   timer: 2000 // set the timer to automatically close after 2 seconds
 });
@@ -88,6 +88,7 @@ module.exports = function(defaults) {
 Available Settings
 
 ```javascript
+importTooltipsterBorderless:  false,
 importTooltipsterLight:  false,
 importTooltipsterNoir:   false,
 importTooltipsterPunk:   false,
@@ -99,211 +100,267 @@ importTooltipsterShadow: false
 When using the component, the following options are available: 
 
 #### animation
-Type: `String`
+Type: `string`
 
 Default: `fade`
 
-Determines how the tooltip will animate in and out.
+Determines how the tooltip will animate in and out. In addition to the built-in transitions, you may also create custom transitions in your CSS files. In IE9 and lower, all animations default to a JavaScript generated, fade animation
 
 Available Options: `[fade, grow, swing, slide, fall]`
 
+#### animationDuration
+Type: `integer`, `integer[]`
+
+Default: `350`
+
+Sets the duration of the animation, in milliseconds. If you wish to provide different durations for the opening and closing animations, provide an array of two different values.
+
 ### arrow
-Type: `Boolean`
+Type: `boolean`
 
 Default: `true`
 
 Adds the "speech bubble arrow" to the tooltip.
 
-### arrowColor
-Type:`hex code / rgb`
-
-Default: `will inherit the tooltip's background color`
-
-Select a specific color for the "speech bubble arrow".
-
-### autoClose
-Type: `Boolean`
-
-Default: `true`
-
-If autoClose is set to false, the tooltip will never close unless you call the 'hide' method yourself.
-
 ### content
-Type: `String, jQuery object`
+Type: `String`,`jQuery object`
 
 Default: `null`
 
-If set, this will override the content of the tooltip. 
+If set, this will override the content of the tooltip. If you provide something else than a string or jQuery-wrapped HTML element, you will need to use the 'functionFormat' option to format your content for display.
 
 ### contentAsHTML
-Type: `Boolean`
+Type: `boolean`
 
 Default: `false`
 
 If the content of the tooltip is provided as a string, it is displayed as plain text by default. If this content should actually be interpreted as HTML, set this option to true. 
 
-### debug
-Type: `Boolean`
-
-Default: `true`
-
-Tooltipster logs notices into the console when you're doing something you ideally shouldn't be doing. Set to false to disable logging.
-
-### delay
-Type: `Number`
-
-Default: `300`
-
-Delay how long it takes (in milliseconds) for the tooltip to start animating in.
-
-### interactive
-Type: `Boolean`
+### contentCloning
+Type: `boolean`
 
 Default: `false`
 
-Enable access of intractive content on hover.
+If you provide a jQuery object to the 'content' option, this sets if it is a clone of this object that should actually be used.
+
+### debug
+Type: `boolean`
+
+Default: `true`
+
+Tooltipster logs hints and notices into the console when you're doing something you ideally shouldn't be doing. Set to false to disable logging.
+
+### delay
+Type: `integer`, `integer[]`
+
+Default: `300`
+
+Upon mouse interaction, this is the delay before the tooltip starts its opening and closing animations when the 'hover' trigger is used. If you wish to specify different delays for opening and closing, you may provide an array of two different values.
+
+### delayTouch
+Type: `integer`, `integer[]`
+
+Default: `[300, 500]`
+
+Upon touch interaction, this is the delay before the tooltip starts its opening and closing animations when the 'hover' trigger is used (*). If you wish to specify different delays for opening and closing, you may provide an array of two different values.
+
+### distance
+Type: `integer`, `integer[]`
+
+Default: `6`
+
+The distance between the origin and the tooltip, in pixels. The value may be an integer or an array of integers (in the usual CSS syntax) if you wish to specify a different distance for each side.
+
+### IEmin
+Type: `integer`
+
+Default: `6`
+
+The minimum version of Internet Explorer to run on.
+
+### interactive
+Type: `boolean`
+
+Default: `false`
+
+Give users the possibility to interact with the content of the tooltip. If you want them to be able to make clicks, fill forms or do other interactions inside the tooltip, you have to set this option to true. When the 'hover' close trigger is used, the user has to move the cursor to the tooltip before it starts closing (this lapse of time has its duration set by the 'delay' option)
 
 ### minWidth
-Type: `Number`
+Type: `integer`
 
 Default: `0` (auto width)
 
 Set a minimum width for the tooltip.
 
+### minIntersection
+Type: `integer`
+
+Default: `16`
+
+Corresponds to the minimum distance to enforce between the center of the arrow and the edges of the tooltip. Mainly used to create an arrow bigger than those of the default themes.
+
 ### maxWidth
-Type: `Number`
+Type: `integer`
 
 Default `null` (no max width)
 
 Set a maximum width for the tooltip.
 
+### repositionOnScroll
+Type: `boolean`
 
-### offsetX
-Type: `Number`
+Default `fale`
 
-Default: 0
+Repositions the tooltip if it goes out of the viewport when the user scrolls the page, in order to keep it visible as long as possible.
 
-Offsets the tooltip (in pixels) farther left/right from the origin.
+### restoration
+Type: `string`
 
-### offsetY
-Type: `Number`
+Default `none`
 
-Default: 0
+Specifies if a TITLE attribute should be restored on the HTML element after a call to the 'destroy' method. This attribute may be omitted, or be restored with the value that existed before Tooltipster was initialized, or be restored with the stringified value of the current content. Note: in case of multiple tooltips on a single element, only the last destroyed tooltip may trigger a restoration. 
 
-Offsets the tooltip (in pixels) farther up/down from the origin.
+Available options: `none`, `previous`, `current`
 
-#### position
-Type: `String`
+### selfDestruction
+Type: `boolean`
 
-Default: `top`
+Default `true`
 
-Set the position of the tooltip.
+Sets if the tooltip should self-destruct after a few seconds when its origin is removed from the DOM. This prevents memory leaks.
 
-Available options: `[right, left, top, top-right, top-left, bottom, bottom-right, bottom-left]`
+#### side
+Type: `string`, `string[]`
 
-### positionTracker
-Type: `Boolean`
+Default: `['top', 'bottom', 'right', 'left']`
 
-Default: `false`
+Sets the side of the tooltip. The value may one of the following: 'top', 'bottom', 'left', 'right'. It may also be an array containing one or more of these values. When using an array, the order of values is taken into account as order of fallbacks and the absence of a side disables it
 
-Will reposition the tooltip if the origin moves. As this option may have an impact on performance, we suggest you enable it only if you need to. 
+Available options: `['top', 'bottom', 'right', 'left']`
 
 ### timer
-Type: `Number`
+Type: `integer`
 
 Default: `0` (disabled)
 
-How long the tooltip should be allowed to live before closing.
+How long the tooltip should be allowed to live before hiding.
 
 #### theme
-Type: `String` (CSS class)
+Type: `string`,`string[]` (CSS class)
 
-Default: `tooltipster-default`
+Default: `empty array`
 
-Set the theme used for your tooltip. 
+Set a theme that will override the default tooltip appearance. You may provide an array of strings to apply several themes at once.
+
+#### trackerInterval
+Type: `integer`
+
+Default: `500`
+
+Sets how often the tracker should run (see trackOrigin and trackTooltip), in milliseconds. The tracker runs even if trackOrigin and trackTooltip are false to check if the origin has not been removed while the tooltip was open, so you shouldn't set too high or too low values unless you need to.
+
+#### trackOrigin
+
+Type: `boolean`
+
+Default: `false`
+
+Repositions the tooltip if the origin moves or is resized. As this option may have an impact on performance, we suggest you enable it only if you need to. 
+
+#### trackTooltip
+
+Type: `boolean`
+
+Default: `false`
+
+Repositions the tooltip if its size changes. When the size change results from a call to the 'content' method, the tooltip is already repositioned without the need to enable this option. As this option may have an impact on performance, we suggest you enable it only if you need to.
 
 ### triggerEvent
-Type: `String`
+Type: `string`
 
 Default: `hover`
 
-Set how tooltips should be activated and closed.
+Sets when the tooltip should open and close. 'hover' and 'click' correspond to predefined sets of built-in triggers, while 'custom' lets you create your own, for a completely customized behavior.
 
-Available options: `[hover, click]`
+Available options: `hover`, `click`, `custom`
+
+### triggerClose
+Type: `object `
+
+When 'trigger' is set to 'custom', all built-in close triggers are disabled by default. This option allows you to reactivate the triggers of your choice to create a customized behavior. Only applies if 'trigger' is set to 'custom'. 
+
+### triggerOpen
+Type: `object `
+
+Similar to 'triggerClose'.
 
 ### updateAnimation
-Type: `Boolean`
+Type: `string`
+
+Default: `rotate`
+
+Plays a subtle animation when the content of the tooltip is updated (if the tooltip is open). You may create custom animations in your CSS files. Set to null to disable the animation.
+
+Available options: `fade`, `rotate`, `scale`, `null`
+
+### viewportAware
+Type: `boolean`
 
 Default: `true`
 
-If a tooltip is open while its content is updated, play a subtle animation when the content changes.
+Tries to place the tooltip in such a way that it will be entirely visible on screen when it's opened. If the tooltip is to be opened while its origin is off screen (using a method call), you may want to set this option to false.
 
-### icon
-Type: `String, jQuery object`
 
-Default: `(?)`
+### zIndex
+Type: `integer`
 
-If using the iconDesktop or iconTouch options, this sets the content for your icon.
+Default: `9999999 `
 
-### iconCloning
-Type: `Boolean`
-Default: `true`
-
-If you provide a jQuery object to the 'icon' option, this sets if it is a clone of this object that should actually be used.
-
-### iconDesktop
-Type: `Boolean`
-Default: `false`
-
-Generate an icon next to your content that is responsible for activating the tooltip on non-touch devices.
-
-### iconTouch
-Type: `Boolean`
-Default: `false`
-
-Generate an icon next to your content that is responsible for activating the tooltip on touch devices (tablets, phones, etc).
-
-### iconTheme
-Type: `CSS class`
-Default: `tooltipster-icon`
-
-If using the iconDesktop or iconTouch options, this sets the class on the icon (used to style the icon).
+Set the z-index of the tooltip.
 
 ## Advanced Options
 
 In order to use the advanced options you need to [extend the component](#extending-the-component) and implement the functions. For more information check the examples on [Tooltipster Docs](http://iamceege.github.io/tooltipster/#options)
 
 ### functionInit
-Type: `Function`
+Type: `function`
 
-Default: `function(origin, content) {}`
+Default: `none(null)`
 
-Create a custom function to be fired only once at instantiation. If the function returns a value, this value will become the content of the tooltip
+A custom function to be fired only once at instantiation.
 
 ### functionBefore
-Type: `Function`
+Type: `function`
 
-Default: `function(origin, continueTooltip) { continueTooltip(); }`
+Default: `none(null)`
 
-Create a custom function to be fired before the tooltip opens. This function may prevent or hold off the opening. 
+A custom function to be fired before the tooltip is opened. This function may prevent the opening if it returns false. 
 
 ### functionReady
-Type: `Function`
+Type: `function`
 
-Default: `function(origin, tooltip) {}`
+Default: `none(null)`
 
-Create a custom function to be fired when the tooltip and its contents have been added to the DOM.
+A custom function to be fired when the tooltip and its contents have been added to the DOM.
 
 ### functionAfter
-Type: `Function`
+Type: `function`
 
-Default: `function(origin) {}`
+Default: `none(null)`
 
-Create a custom function to be fired once the tooltip has been closed and removed from the DOM.
+A custom function to be fired once the tooltip has been closed and removed from the DOM.
 
-### positionTrackerCallback
-Type: `Function`
 
-Default: `A function that will close the tooltip if the trigger is 'hover' and autoClose is false.`
+### functionFormat
+Type: `function`
 
-Called after the tooltip has been repositioned by the position tracker (if enabled). 
+Default: `none(null)`
+
+A custom function that does not modify the content but that can format it for display. It gets the two first usual arguments and also the content as third argument. It must return the value that will be displayed in the tooltip, either a string or a jQuery-wrapped HTML element.
+
+### functionPosition
+Type: `function`
+
+Default: `none(null)`
+
+A custom function fired when the tooltip is repositioned. It gives you the ability to slightly or completely modify the position that Tooltipster is about to give to the tooltip. It gets the proposed set of placement values as third argument. The function must return the set of placement values, which you may have edited.

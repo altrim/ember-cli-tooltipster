@@ -11,7 +11,7 @@ export default TooltipsterComponent.extend({
   // define properties
   content: 'My awesome tooltip button',
 
-  position: 'right',
+  side: 'right',
 
   timer: 2000 // tooltip will close automatically after 2 seconds
 });

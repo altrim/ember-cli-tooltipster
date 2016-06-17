@@ -13,7 +13,7 @@
     content="Try clicking <a href='https://www.google.com'>this link</a>"
     contentAsHTML=true
     interactive=true
-    theme="tooltipster-simple"
+    theme="tooltipster-borderless"
     }}
     Hover
     {{/tool-tipster}}
@@ -33,9 +33,9 @@
 
   <li>
     {{#tool-tipster
-    content="<img src='http://lorempixel.com/45/45/abstract/' width='50' height='50' style='float:left;margin:0 5px 0 0;'/><p style='text-align:left;'><strong>Neque porro quisquam est Qui.</strong> Dolorem ipsum quia dolor sit amet.</p>"
+    content="<img src='http://lorempixel.com/45/45/abstract/' width='50' height='50' style='float:left;margin:1em 10px 0 0;border:2px solid white'/><p style='text-align:left;'><strong>Neque porro quisquam est Qui.</strong> Dolorem ipsum quia dolor sit amet.</p>"
     contentAsHTML=true
-    position="right"
+    side="right"
     minWidth=300
     maxWidth=300
   }}
@@ -47,7 +47,7 @@
 </li>
 
 <li>
-  {{#tool-tipster title="Fade tooltip on the right" theme="tooltipster-punk" animation="fade" position="right"}}
+  {{#tool-tipster title="Fade tooltip on the right" theme="tooltipster-punk" animation="fade" side="right"}}
   Hover
   {{/tool-tipster}}
   <p>
@@ -56,7 +56,7 @@
 </li>
 
 <li>
-  {{#tool-tipster title="Grow tooltip on the left" theme="tooltipster-light" animation="grow" position="left"}}
+  {{#tool-tipster title="Grow tooltip on the left" theme="tooltipster-light" animation="grow" side="left"}}
   Hover
   {{/tool-tipster}}
   <p>
@@ -65,7 +65,7 @@
 </li>
 
 <li>
-  {{#tool-tipster title="Swing tooltip on bottom" theme="tooltipster-noir" animation="swing" position="bottom"}}
+  {{#tool-tipster title="Swing tooltip on bottom" theme="tooltipster-noir" animation="swing" side="bottom"}}
   Hover
   {{/tool-tipster}}
   <p>
@@ -74,7 +74,7 @@
 </li>
 
 <li>
-  {{#tool-tipster title="Slide tooltip" theme="tooltipster-shadow" animation="slide" position="top-right"}}
+  {{#tool-tipster title="Slide tooltip" theme="tooltipster-shadow" animation="slide" side="top"}}
   Hover
   {{/tool-tipster}}
   <p>
@@ -83,7 +83,7 @@
 </li>
 
 <li>
-  {{#tool-tipster title="Fall tooltip" theme="tooltipster-simple" animation="Fall" position="bottom-right"}}
+  {{#tool-tipster title="Fall tooltip" theme="tooltipster-borderless" animation="fall" side="bottom"}}
   Hover
   {{/tool-tipster}}
   <p>
@@ -92,7 +92,7 @@
 </li>
 
 <li>
-  {{#tool-tipster title="Timed tooltip - will close after 2 seconds" theme="tooltipster-simple" timer=2000}}
+  {{#tool-tipster title="Timed tooltip - will close after 2 seconds" theme="tooltipster-borderless" timer=2000}}
   Hover
   {{/tool-tipster}}
   <p>
@@ -106,14 +106,6 @@
   {{/tool-tipster}}
   <p>
     Trigger on click
-  </p>
-</li>
-<li>
-  {{#tool-tipster title="Use separate icons to launch your tooltips on either desktops or touch devices - or both!" iconDesktop=true iconTouch=true}}
-  Hover on icon
-  {{/tool-tipster}}
-  <p>
-    Attach tooltips to icons
   </p>
 </li>
 
