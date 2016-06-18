@@ -57,7 +57,7 @@ export default Ember.Component.extend({
   ],
 
   _initializeTooltipster: on('didInsertElement', function() {
-    let options = Object.assign({}, this._getStandardOptions());
+    let options = this._getStandardOptions();
     let componentElement = this.$();
     componentElement.tooltipster(options);
     this.set('tooltipsterInstance', componentElement.tooltipster('instance'));
@@ -97,6 +97,7 @@ export default Ember.Component.extend({
     if (this.$().data('tooltipster-ns')) {
       this.$().tooltipster('destroy');
     }
+    this.set('tooltipsterInstance', null);
     this.$().off();
   })
 });
