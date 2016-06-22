@@ -8,7 +8,7 @@ module.exports = {
   afterInstall: function( /*options*/ ) {
     return this.addBowerPackagesToProject([{
       name: 'tooltipster',
-      target: '^4.0.2'
+      target: '^4.0.4'
     }]);
   }
 };
