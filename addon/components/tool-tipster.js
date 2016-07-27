@@ -40,6 +40,7 @@ export default Ember.Component.extend({
     'maxWidth',
     'minIntersection',
     'minWidth',
+    'plugins',
     'repositionOnScroll',
     'restoration',
     'selfDestruction',
