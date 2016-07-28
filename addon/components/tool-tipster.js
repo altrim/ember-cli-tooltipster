@@ -58,11 +58,22 @@ export default Ember.Component.extend({
   ],
 
   _initializeTooltipster: on('didInsertElement', function() {
-    let options = this._getStandardOptions();
+    let options = this._getOptions();
     let componentElement = this.$();
     componentElement.tooltipster(options);
     this.set('tooltipsterInstance', componentElement.tooltipster('instance'));
   }),
+
+  _getOptions() {
+    let options = this._getStandardOptions();
+
+    let pluginOptions = this._getPluginOptions();
+    for (var option in pluginOptions) {
+      options[option] = pluginOptions[option];
+    }
+
+    return options;
+  },
 
   _getStandardOptions() {
     let options = {};
@@ -81,6 +92,17 @@ export default Ember.Component.extend({
     ['functionInit', 'functionBefore', 'functionReady', 'functionAfter', 'functionFormat', 'functionPosition'].forEach(fn => {
       options[fn] = $.proxy(this[fn], this);
     });
+    return options;
+  },
+
+  _getPluginOptions() {
+    let options = {};
+    let pluginOptionKeys = this.get('pluginOptions');
+    if (!isEmpty(pluginOptionKeys)) {
+      pluginOptionKeys.forEach((pluginOption) => {
+        options[pluginOption] = this.get(pluginOption);
+      });
+    }
     return options;
   },
 
