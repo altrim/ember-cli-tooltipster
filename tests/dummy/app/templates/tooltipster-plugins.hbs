@@ -1,0 +1,35 @@
+{{#paper-content flex=true scroll-y=true layout-padding=true}}
+<h2>Using with plugin</h2>
+<p>
+  As of Tooltipster v4 features may be extended through the use of <a href="http://iamceege.github.io/tooltipster/#plugins" target="_blank">plugins</a>.
+</p>
+<p>
+  Plugins may add new styles, new options, new methods, new behaviors, etc.
+</p>
+
+<h4>Demo</h4>
+  {{#follower-tooltip}} Extensible with plugins {{/follower-tooltip}}
+
+<p>
+  The following example shows how to use the <a href="https://github.com/louisameline/tooltipster-follower" target="_blank">tooltipster follower</a> plugin with custom component.
+</p>
+
+
+<p>
+   We create custom component similar to the one defined in {{#link-to "custom-components"}} extending the component {{/link-to}}
+</p>
+{{code-snippet name="follower-tooltip.js"}}
+
+<p>
+  As you can see from the code above to use a plugin we just specify the name of the plugin in the plugins array <em>plugins: ['follower']</em>.
+</p>
+<p>
+ Additionally since plugins may add new options, in the <em> pluginOptions: ['offset', 'anchor'] </em> array we can specify which additional options should be inserted into the tooltipster.
+</p>
+<p>
+  In this case we use the <em> offset </em> and <em> anchor </em> options from the <em>tooltipster-follower</em> plugin.
+</p>
+
+
+
+{{/paper-content}}

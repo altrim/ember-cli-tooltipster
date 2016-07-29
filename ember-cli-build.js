@@ -3,7 +3,8 @@ var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
     var app = new EmberAddon(defaults, {
-
+      snippetPaths: ['tests/dummy/snippets'],
+      snippetSearchPaths: ['tests/dummy/app']
     });
 
     /*
@@ -15,6 +16,9 @@ module.exports = function(defaults) {
 
     app.import('bower_components/tooltipster/dist/js/tooltipster.bundle.min.js');
     app.import('bower_components/tooltipster/dist/css/tooltipster.bundle.min.css');
+
+    app.import('bower_components/tooltipster-follower/dist/css/tooltipster-follower.min.css');
+    app.import('bower_components/tooltipster-follower/dist/js/tooltipster-follower.js');
 
     return app.toTree();
 };

@@ -8,26 +8,9 @@
 {{#my-button hide=tooltip closeTooltip='closeTooltip'}} Tooltipster button {{/my-button}}
 
 <h4>Component</h4>
-{{#code-block language='javascript'}}
-//components/my-button.js
-import TooltipsterComponent from 'ember-cli-tooltipster/components/tool-tipster';
-
-  export default TooltipsterComponent.extend({
-
-  tagName: 'button',
-
-  classNames: ['my-awesome-button'],
-
-  // define properties
-  content: 'My awesome tooltip',
-
-  side: 'right',
-
-  timer: 2000 // tooltip will close automatically after 2 seconds
-});
-{{/code-block}}
+{{code-snippet name="custom-component.js"}}
 
 <h4>Template</h4>
-{{#code-block language='handlebars'}}\{{#my-button}}Tooltipster button\{{/my-button}}{{/code-block}}
+{{code-snippet name="custom-component.hbs"}}
 
 {{/paper-content}}

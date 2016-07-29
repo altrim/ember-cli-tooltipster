@@ -1,11 +1,11 @@
 <ul id="demos">
+  <tool-tipster content="Default Tooltip"></tool-tipster>
   <li>
-    {{#tool-tipster title="This is a tooltip"}}
+    {{#tool-tipster content="Default Tooltip"}}
     Hover
     {{/tool-tipster}}
-    <p>
-      Default settings
-    </p>
+    <p> Default </p>
+    {{code-snippet name="default-settings.hbs"}}
   </li>
 
   <li>
@@ -17,96 +17,92 @@
     }}
     Hover
     {{/tool-tipster}}
-    <p>
-      Interaction with tooltips
-    </p>
+    <p> Interaction with tooltips </p>
+      {{code-snippet name="interaction-tooltip.hbs"}}
   </li>
 
   <li>
     {{#tool-tipster title="Custom theme & animation" theme="tooltipster-punk" animation="grow"}}
-    Hover
+      Hover
     {{/tool-tipster}}
-    <p>
-      Custom themes & animations
-    </p>
+    <p> Custom themes & animations </p>
+    {{code-snippet name="custom-theme-animation.hbs"}}
   </li>
 
   <li>
     {{#tool-tipster
-    content="<img src='http://lorempixel.com/45/45/abstract/' width='50' height='50' style='float:left;margin:1em 10px 0 0;border:2px solid white'/><p style='text-align:left;'><strong>Neque porro quisquam est Qui.</strong> Dolorem ipsum quia dolor sit amet.</p>"
+    content="<img src='http://lorempixel.com/45/45/abstract/'
+            width='50'
+            height='50'
+            style='float:left ;margin:1em 10px 0 0; border:2px solid white'/>
+            <p style='text-align:left;'>
+              <strong>Neque porro quisquam est Qui.</strong>
+              Dolorem ipsum quia dolor sit amet.
+            </p>"
     contentAsHTML=true
     side="right"
     minWidth=300
-    maxWidth=300
-  }}
+    maxWidth=300 }}
   Hover
   {{/tool-tipster}}
-  <p>
-    Fixed width, position, & HTML
-  </p>
+  <p> Fixed width, position, & HTML </p>
+  {{code-snippet name="html-tooltip.hbs"}}
 </li>
 
 <li>
   {{#tool-tipster title="Fade tooltip on the right" theme="tooltipster-punk" animation="fade" side="right"}}
   Hover
   {{/tool-tipster}}
-  <p>
-    Fade
-  </p>
+  <p> Fade </p>
+  {{code-snippet name="fade.hbs"}}
 </li>
 
 <li>
   {{#tool-tipster title="Grow tooltip on the left" theme="tooltipster-light" animation="grow" side="left"}}
   Hover
   {{/tool-tipster}}
-  <p>
-    Grow
-  </p>
+  <p> Grow </p>
+  {{code-snippet name="grow.hbs"}}
 </li>
 
 <li>
   {{#tool-tipster title="Swing tooltip on bottom" theme="tooltipster-noir" animation="swing" side="bottom"}}
   Hover
   {{/tool-tipster}}
-  <p>
-    Swing
-  </p>
+  <p> Swing </p>
+  {{code-snippet name="swing.hbs"}}
 </li>
 
 <li>
   {{#tool-tipster title="Slide tooltip" theme="tooltipster-shadow" animation="slide" side="top"}}
   Hover
   {{/tool-tipster}}
-  <p>
-    Slide
-  </p>
+  <p> Slide </p>
+  {{code-snippet name="slide.hbs"}}
 </li>
 
 <li>
   {{#tool-tipster title="Fall tooltip" theme="tooltipster-borderless" animation="fall" side="bottom"}}
   Hover
   {{/tool-tipster}}
-  <p>
-    Fall
-  </p>
+  <p> Fall </p>
+  {{code-snippet name="fall.hbs"}}
 </li>
 
 <li>
   {{#tool-tipster title="Timed tooltip - will close after 2 seconds" theme="tooltipster-borderless" timer=2000}}
   Hover
   {{/tool-tipster}}
-  <p>
-    With timer (auto closes)
-  </p>
+  <p> With timer (auto closes) </p>
+  {{code-snippet name="with-timer.hbs"}}
 </li>
 
 <li>
   {{#tool-tipster title="Show/hide on click" triggerEvent="click"}}
   Click
   {{/tool-tipster}}
-  <p>
-    Trigger on click
-  </p>
+  <p> Trigger on click </p>
+  {{code-snippet name="trigger-click.hbs"}}
 </li>
 
 </ul>

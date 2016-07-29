@@ -8,6 +8,10 @@
     "matchMedia": "0.2.0",
     "hammer.js": "^2.0.8",
     "tooltipster": "^4.1.2",
-    "prism": "^1.5.1"
+    "prism": "^1.5.1",
+    "highlightjs": "^9.4.0",
+    "code-highlight-linenums": "^0.2.0",
+    "hljs-themes": "^0.0.7",
+    "tooltipster-follower": "^0.1.2"
   }
 }

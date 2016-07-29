@@ -8,6 +8,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('custom-components');
   this.route('advanced-options');
+  this.route('tooltipster-plugins');
 });
 
 export default Router;
