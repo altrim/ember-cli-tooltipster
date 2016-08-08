@@ -112,7 +112,9 @@ export default Ember.Component.extend({
       if (content instanceof SafeString) {
         content = content.toString();
       }
-      this.get('tooltipsterInstance').content(content);
+      if (this.get('tooltipsterInstance') !== null) {
+        this.get('tooltipsterInstance').content(content);
+      }
     });
   }),
 
