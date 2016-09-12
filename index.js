@@ -6,6 +6,7 @@ var util = require('util');
 var extend = util._extend;
 
 var defaultOptions = {
+  importTooltipsterDefaultStyles: true,
   importTooltipsterBorderless: false,
   importTooltipsterLight: false,
   importTooltipsterNoir: false,
@@ -21,9 +22,10 @@ module.exports = {
 
     var options = extend(defaultOptions, app.options['ember-cli-tooltipster']);
     var themesPath = path.join(app.bowerDirectory, 'tooltipster/dist/css/plugins/tooltipster/sideTip/themes/');
-
-    app.import(app.bowerDirectory + '/tooltipster/dist/css/tooltipster.bundle.min.css');
-
+    
+    if (options.importTooltipsterDefaultStyles) {
+      app.import(app.bowerDirectory + '/tooltipster/dist/css/tooltipster.bundle.min.css');
+    }
     if (options.importTooltipsterBorderless) {
       app.import(path.join(themesPath, 'tooltipster-sideTip-borderless.min.css'));
     }
