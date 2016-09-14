@@ -6,8 +6,8 @@ const {
   on,
   isEmpty,
   $,
-  Handlebars: {
-    SafeString
+  String: {
+    htmlSafe
   }
 } = Ember;
 
@@ -84,8 +84,8 @@ export default Ember.Component.extend({
       }
     });
     options.trigger = this.get('triggerEvent');
-    // Handle SafeString
-    if (content instanceof SafeString) {
+    // Handle htmlSafe
+    if (content instanceof htmlSafe) {
       options.content = content.toString();
     }
 
@@ -109,7 +109,7 @@ export default Ember.Component.extend({
   _onContentDidChange: observer('content', 'title', function() {
     run.scheduleOnce('afterRender', this, () => {
       let content = this.get('content') || this.get('title');
-      if (content instanceof SafeString) {
+      if (content instanceof htmlSafe) {
         content = content.toString();
       }
       if (this.get('tooltipsterInstance') !== null) {
