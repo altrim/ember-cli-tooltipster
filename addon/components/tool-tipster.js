@@ -1,14 +1,12 @@
 import Ember from 'ember';
+import isHTMLSafe from 'ember-string-ishtmlsafe-polyfill';
 
 const {
   run,
   observer,
   on,
   isEmpty,
-  $,
-  Handlebars: {
-    SafeString
-  }
+  $
 } = Ember;
 
 export default Ember.Component.extend({
@@ -84,8 +82,8 @@ export default Ember.Component.extend({
       }
     });
     options.trigger = this.get('triggerEvent');
-    // Handle SafeString
-    if (content instanceof SafeString) {
+    // Handle safe string using ishtmlsafe-polyfill
+    if (isHTMLSafe(content)) {
       options.content = content.toString();
     }
 
@@ -109,7 +107,7 @@ export default Ember.Component.extend({
   _onContentDidChange: observer('content', 'title', function() {
     run.scheduleOnce('afterRender', this, () => {
       let content = this.get('content') || this.get('title');
-      if (content instanceof SafeString) {
+      if (isHTMLSafe(content)) {
         content = content.toString();
       }
       if (this.get('tooltipsterInstance') !== null) {
