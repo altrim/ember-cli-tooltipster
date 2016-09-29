@@ -95,6 +95,10 @@ importTooltipsterPunk:   false,
 importTooltipsterShadow: false
 ```
 
+## Default/Bundled Styles
+
+Unlike the themes above, the default base styles are `included` when you install the addon.  To remove the base styles you need to set ```importTooltipsterDefaultStyles``` to ```false``` in your build file.
+
 ## Available Options
 
 When using the component, the following options are available: 
