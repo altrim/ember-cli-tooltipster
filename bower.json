@@ -1,17 +1,15 @@
 {
   "name": "ember-cli-tooltipster",
   "dependencies": {
-    "ember": "~2.7.0",
+    "ember": "~2.8.1",
     "ember-cli-shims": "0.1.1",
-    "ember-qunit-notifications": "0.1.0",
-    "hammerjs": "~2.0.8",
     "matchMedia": "0.2.0",
     "hammer.js": "^2.0.8",
-    "tooltipster": "^4.1.2",
+    "tooltipster": "^4.1.5",
     "prism": "^1.5.1",
     "highlightjs": "^9.4.0",
     "code-highlight-linenums": "^0.2.0",
     "hljs-themes": "^0.0.7",
-    "tooltipster-follower": "^0.1.2"
+    "tooltipster-follower": "^0.1.5"
   }
 }
