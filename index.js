@@ -22,7 +22,7 @@ module.exports = {
 
     var options = extend(defaultOptions, app.options['ember-cli-tooltipster']);
     var themesPath = path.join(app.bowerDirectory, 'tooltipster/dist/css/plugins/tooltipster/sideTip/themes/');
-    
+
     if (options.importTooltipsterDefaultStyles) {
       app.import(app.bowerDirectory + '/tooltipster/dist/css/tooltipster.bundle.min.css');
     }
@@ -42,6 +42,8 @@ module.exports = {
       app.import(path.join(themesPath, 'tooltipster-sideTip-shadow.min.css'));
     }
 
-    app.import(app.bowerDirectory + '/tooltipster/dist/js/tooltipster.bundle.min.js');
+    if (!process.env.EMBER_CLI_FASTBOOT) {
+      app.import(app.bowerDirectory + '/tooltipster/dist/js/tooltipster.bundle.min.js');
+    }
   }
 };
