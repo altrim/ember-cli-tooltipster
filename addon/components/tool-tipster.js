@@ -1,12 +1,14 @@
 import Ember from 'ember';
 import isHTMLSafe from 'ember-string-ishtmlsafe-polyfill';
+import getOwner from 'ember-getowner-polyfill';
 
 const {
   run,
   observer,
   on,
   isEmpty,
-  $
+  $,
+  assign
 } = Ember;
 
 export default Ember.Component.extend({
@@ -64,9 +66,9 @@ export default Ember.Component.extend({
 
   _getOptions() {
     let options = this._getStandardOptions();
-
     let pluginOptions = this._getPluginOptions();
-    for (var option in pluginOptions) {
+
+    for (let option in pluginOptions) {
       options[option] = pluginOptions[option];
     }
 
@@ -76,12 +78,16 @@ export default Ember.Component.extend({
   _getStandardOptions() {
     let options = {};
     let content = this.get('content') || this.get('title');
+    let addonConfig = getOwner(this).resolveRegistration('config:environment')['ember-cli-tooltipster'] || {};
+
     this.get('tooltipsterOptions').forEach((option) => {
       if (!isEmpty(this.get(option))) {
         options[option] = this.get(option);
       }
     });
+
     options.trigger = this.get('triggerEvent');
+
     // Handle safe string using ishtmlsafe-polyfill
     if (isHTMLSafe(content)) {
       options.content = content.toString();
@@ -90,7 +96,8 @@ export default Ember.Component.extend({
     ['functionInit', 'functionBefore', 'functionReady', 'functionAfter', 'functionFormat', 'functionPosition'].forEach(fn => {
       options[fn] = $.proxy(this[fn], this);
     });
-    return options;
+
+    return assign({}, addonConfig, options);
   },
 
   _getPluginOptions() {
