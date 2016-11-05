@@ -8,8 +8,9 @@ const {
   on,
   isEmpty,
   $,
-  assign
 } = Ember;
+
+const assign = Object.assign || Ember.assign;
 
 export default Ember.Component.extend({
   tooltipsterInstance: null,
