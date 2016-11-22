@@ -11,6 +11,7 @@ const {
 } = Ember;
 
 const assign = Object.assign || Ember.assign;
+const merge = Ember.merge;
 
 export default Ember.Component.extend({
   tooltipsterInstance: null,
@@ -97,8 +98,12 @@ export default Ember.Component.extend({
     ['functionInit', 'functionBefore', 'functionReady', 'functionAfter', 'functionFormat', 'functionPosition'].forEach(fn => {
       options[fn] = $.proxy(this[fn], this);
     });
-
-    return assign({}, addonConfig, options);
+    if (!isEmpty(assign)) {
+      return assign({}, addonConfig, options);
+    } else {
+      const localAddonConfing = merge({}, addonConfig);
+      return merge(localAddonConfing, options);
+    }
   },
 
   _getPluginOptions() {
