@@ -98,11 +98,12 @@ export default Ember.Component.extend({
     ['functionInit', 'functionBefore', 'functionReady', 'functionAfter', 'functionFormat', 'functionPosition'].forEach(fn => {
       options[fn] = $.proxy(this[fn], this);
     });
+
     if (!isEmpty(assign)) {
       return assign({}, addonConfig, options);
     } else {
-      const localAddonConfing = merge({}, addonConfig);
-      return merge(localAddonConfing, options);
+      const localAddonConfig = merge({}, addonConfig);
+      return merge(localAddonConfig, options);
     }
   },
 
