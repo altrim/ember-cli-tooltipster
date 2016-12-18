@@ -1,69 +1,68 @@
-{{#paper-nav-container class="app-container"}}
+ {{#paper-sidenav-container class="inner-sidenav"}}
 
-  {{#paper-sidenav class='md-sidenav-left md-whiteframe-z2' locked-open='gt-sm'}}
+      {{#paper-sidenav
+          class="md-whiteframe-z2"
+          name="left"
+          open=leftSideBarOpen
+          onToggle=(action (mut leftSideBarOpen))
+        }}
+        {{#paper-toolbar as |toolbar|}}
+          {{#paper-toolbar-tools}}Ember CLI Tooltipster{{/paper-toolbar-tools}}
+        {{/paper-toolbar}}
+        {{#paper-content }}
 
-    {{#paper-toolbar}}
-      <div class="md-toolbar-tools">
+           {{#paper-list}}
+              {{#paper-item onClick=(transition-to "/")}}
+                Examples
+              {{/paper-item}}
 
-        <div class="logo-wrapper">
-          <h2 id="title">
-            {{#link-to 'index'}}
-              <span class="text">Ember CLI Tooltipster</span>
-            {{/link-to}}
-          </h2>
+              {{#paper-item onClick=(transition-to "custom-components") }}
+                Extending the component
+              {{/paper-item}}
+
+              {{#paper-item onClick=(transition-to "advanced-options") }}
+                Advanced options
+              {{/paper-item}}
+
+              {{#paper-item onClick=(transition-to "tooltipster-plugins") }}
+                Using with plugins
+              {{/paper-item}}
+
+              {{paper-divider}}
+
+              {{#paper-item}}
+                <a href="https://github.com/altrim/ember-cli-tooltipster" target="_blank">
+                  View source on GitHub
+                </a>
+              {{/paper-item}}
+
+              {{#paper-item}}
+                <a href="http://iamceege.github.io/tooltipster/" target="_blank">
+                  Tooltipster
+                </a>
+              {{/paper-item}}
+
+          {{/paper-list}}
+        {{/paper-content}}
+      {{/paper-sidenav}}
+
+      {{#paper-card-content class="flex"}}
+
+        <div class="layout-column flex">
+          {{#paper-toolbar}}
+            {{#paper-toolbar-tools}}
+              {{#paper-sidenav-toggle name="left" as |toggleAction|}}
+                  {{#paper-button classNames="hide-gt-sm" onClick=(action toggleAction)}}
+                    {{paper-icon "menu"}}
+                  {{/paper-button}}
+              {{/paper-sidenav-toggle}}
+                <h2>
+                  Demos
+                </h2>
+                <span class="flex"></span>
+                {{/paper-toolbar-tools}}
+              {{/paper-toolbar}}
+            {{outlet}}
         </div>
-      </div>
-    {{/paper-toolbar}}
-
-    {{#paper-content}}
-      {{#paper-list}}
-
-        {{#paper-item action='transitionTo' param='/'}}
-          Examples
-        {{/paper-item}}
-
-        {{#paper-item action='transitionTo' param='custom-components'}}
-          Extending the component
-        {{/paper-item}}
-
-        {{#paper-item action='transitionTo' param='advanced-options'}}
-          Advanced options
-        {{/paper-item}}
-
-        {{#paper-item action='transitionTo' param='tooltipster-plugins'}}
-          Using with plugins
-        {{/paper-item}}
-
-        {{paper-divider}}
-
-        {{#paper-item action='linkTo' param='https://github.com/altrim/ember-cli-tooltipster'}}
-          View source on GitHub
-        {{/paper-item}}
-
-        {{#paper-item action='linkTo' param='http://iamceege.github.io/tooltipster/'}}
-          Tooltipster
-        {{/paper-item}}
-
-      {{/paper-list}}
-    {{/paper-content}}
-
-  {{/paper-sidenav}}
-
-  <div layout="column" tabindex="-1" role="main" flex>
-    {{#paper-toolbar}}
-      <div class="md-toolbar-tools">
-        {{#paper-sidenav-toggle as |toggle|}}
-          {{#paper-button target=toggle action='toggleMenu' icon-button=true}}
-            {{paper-icon icon='menu'}}
-          {{/paper-button}}
-        {{/paper-sidenav-toggle}}
-        <span class="md-breadcrumb-page">Demos</span>
-      </div>
-    {{/paper-toolbar}}
-
-    {{#paper-content class='md-padding'}}
-      {{outlet}}
-    {{/paper-content}}
-  </div>
-
-{{/paper-nav-container}}
+      {{/paper-card-content}}
+    {{/paper-sidenav-container}}

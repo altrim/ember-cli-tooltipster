@@ -1,27 +1,28 @@
-{{#paper-content flex=true scroll-y=true layout-padding=true}}
-<h2>Advanced Options</h2>
+{{#paper-content class="md-padding"}}
+<div class="layout-column flex">
+  <h2>Advanced Options</h2>
 
-<p>
-  Using AJAX to generate your tooltip content.
-</p>
+  <p>
+    Using AJAX to generate your tooltip content.
+  </p>
 
-<p>
-  We'll use <strong>functionBefore</strong> that fires everytime before the tooltip launches, to replace the loading notification with an AJAX call. For more information check the <a href="http://iamceege.github.io/tooltipster/#functionBeforeExample" target="_blank">official docs on Tooltipster web page</a>
-</p>
+  <p>
+    We'll use <strong>functionBefore</strong> that fires everytime before the tooltip launches, to replace the loading notification with an AJAX call. For more information check the <a href="http://iamceege.github.io/tooltipster/#functionBeforeExample" target="_blank">official docs on Tooltipster web page</a>
+  </p>
 
-<p>
-  In the example below we replace the content of the tooltip with the <a href="https://github.com/altrim/ember-cli-tooltipster" target="_blank">addon</a> description that we fetch through GitHub API. After the content is updated we cache it for the next time the tooltip is opened.
-</p>
+  <p>
+    In the example below we replace the content of the tooltip with the <a href="https://github.com/altrim/ember-cli-tooltipster" target="_blank">addon</a> description that we fetch through GitHub API. After the content is updated we cache it for the next time the tooltip is opened.
+  </p>
 
-<h4>Demo</h4>
-{{#ajax-tooltip}} Ajax Tooltipster {{/ajax-tooltip}}
+  <h4>Demo</h4>
+  {{#ajax-tooltip}} Ajax Tooltipster {{/ajax-tooltip}}
 
-<h4>Component</h4>
+  <h4>Component</h4>
 
-{{code-snippet name="advanced-option.js"}}
+  {{code-snippet name="advanced-option.js"}}
 
-<h4>Template</h4>
+  <h4>Template</h4>
 
-{{code-snippet name="advanced-option.hbs"}}
-
+  {{code-snippet name="advanced-option.hbs"}}
+</div>
 {{/paper-content}}

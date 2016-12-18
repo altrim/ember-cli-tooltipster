@@ -1,16 +1,13 @@
-$primary: 'deep-orange';
-@import 'ember-paper';
 body {
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  max-width: 100%;
+  max-height: 100%;
 }
-.app-container,
-body > div.ember-view:first-of-type {
-  width: 100%;
-  height: 100%;
-}
+
+$primary: 'deep-orange';
+$warn: 'amber';
+
+// Import the rest of ember-paper.
+@import "ember-paper";
 
 #demos {
   li {
@@ -60,6 +57,7 @@ body > div.ember-view:first-of-type {
   -moz-transition: all 0.3s ease 0s;
   -webkit-transition: all 0.3s ease 0s;
   text-align: center;
+  max-width: 180px;
 }
 // themes
 
