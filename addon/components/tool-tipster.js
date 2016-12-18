@@ -1,17 +1,17 @@
 import Ember from 'ember';
 import isHTMLSafe from 'ember-string-ishtmlsafe-polyfill';
-import getOwner from 'ember-getowner-polyfill';
 
 const {
-  run,
+  $,
+  getOwner,
+  isEmpty,
+  merge,
   observer,
   on,
-  isEmpty,
-  $,
+  run
 } = Ember;
 
 const assign = Object.assign || Ember.assign;
-const merge = Ember.merge;
 
 export default Ember.Component.extend({
   tooltipsterInstance: null,
@@ -59,7 +59,16 @@ export default Ember.Component.extend({
     'zIndex'
   ],
 
-  _initializeTooltipster: on('didInsertElement', function() {
+  fnOptions: [
+    'functionInit',
+    'functionBefore',
+    'functionReady',
+    'functionAfter',
+    'functionFormat',
+    'functionPosition'
+  ],
+
+  _initializeTooltipster: on('didInsertElement', function () {
     let options = this._getOptions();
     let componentElement = this.$();
     componentElement.tooltipster(options);
@@ -73,7 +82,6 @@ export default Ember.Component.extend({
     for (let option in pluginOptions) {
       options[option] = pluginOptions[option];
     }
-
     return options;
   },
 
@@ -82,7 +90,7 @@ export default Ember.Component.extend({
     let content = this.get('content') || this.get('title');
     let addonConfig = getOwner(this).resolveRegistration('config:environment')['ember-cli-tooltipster'] || {};
 
-    this.get('tooltipsterOptions').forEach((option) => {
+    this.get('tooltipsterOptions').forEach(option => {
       if (!isEmpty(this.get(option))) {
         options[option] = this.get(option);
       }
@@ -95,30 +103,26 @@ export default Ember.Component.extend({
       options.content = content.toString();
     }
 
-    ['functionInit', 'functionBefore', 'functionReady', 'functionAfter', 'functionFormat', 'functionPosition'].forEach(fn => {
-      options[fn] = $.proxy(this[fn], this);
-    });
+    this.get('fnOptions').forEach(fn => options[fn] = $.proxy(this[fn], this));
 
-    if (!isEmpty(assign)) {
-      return assign({}, addonConfig, options);
-    } else {
+    if (isEmpty(assign)) {
       const localAddonConfig = merge({}, addonConfig);
       return merge(localAddonConfig, options);
     }
+
+    return assign({}, addonConfig, options);
   },
 
   _getPluginOptions() {
     let options = {};
     let pluginOptionKeys = this.get('pluginOptions');
     if (!isEmpty(pluginOptionKeys)) {
-      pluginOptionKeys.forEach((pluginOption) => {
-        options[pluginOption] = this.get(pluginOption);
-      });
+      pluginOptionKeys.forEach(pluginOption => options[pluginOption] = this.get(pluginOption));
     }
     return options;
   },
 
-  _onContentDidChange: observer('content', 'title', function() {
+  _onContentDidChange: observer('content', 'title', function () {
     run.scheduleOnce('afterRender', this, () => {
       let content = this.get('content') || this.get('title');
       if (isHTMLSafe(content)) {
@@ -130,7 +134,7 @@ export default Ember.Component.extend({
     });
   }),
 
-  _destroyTooltipster: on('willDestroyElement', function() {
+  _destroyTooltipster: on('willDestroyElement', function () {
     if (this.$().data('tooltipster-ns')) {
       this.$().tooltipster('destroy');
     }
