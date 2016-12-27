@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-tooltipster",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "An Ember CLI add-on that wraps jQuery Tooltipster into an ember component.",
   "directories": {
     "doc": "doc",
