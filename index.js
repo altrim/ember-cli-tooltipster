@@ -17,9 +17,14 @@ var defaultOptions = {
 module.exports = {
   name: 'ember-cli-tooltipster',
 
-  included: function(app) {
-    this._super.included(app);
-
+  included: function(parent) {
+    this._super.included(parent);
+    var app;
+    if (parent.app) {
+      app = parent.app;
+    } else {
+      app = parent;
+    }
     var options = extend(defaultOptions, app.options['ember-cli-tooltipster']);
     var themesPath = path.join(app.bowerDirectory, 'tooltipster/dist/css/plugins/tooltipster/sideTip/themes/');
 
