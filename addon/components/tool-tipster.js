@@ -124,7 +124,7 @@ export default Ember.Component.extend({
 
   _onContentDidChange: observer('content', 'title', function () {
     run.scheduleOnce('afterRender', this, () => {
-      let content = this.get('content') || this.get('title');
+      let content = this.get('content') || this.get('title') || null;
       if (isHTMLSafe(content)) {
         content = content.toString();
       }
