@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import isHTMLSafe from 'ember-string-ishtmlsafe-polyfill';
 
 const {
   $,
@@ -10,6 +9,8 @@ const {
   on,
   run
 } = Ember;
+
+const { isHTMLSafe } = Ember.String;
 
 const assign = Object.assign || Ember.assign;
 

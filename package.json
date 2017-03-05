@@ -55,7 +55,7 @@
     "popover"
   ],
   "dependencies": {
-    "ember-string-ishtmlsafe-polyfill": "^1.0.1",
+    "ember-string-ishtmlsafe-polyfill": "^1.1.0",
     "ember-cli-babel": "^5.2.1"
   },
   "ember-addon": {
