@@ -34,8 +34,8 @@
     "ember-cli-jshint": "^2.0.1",
     "ember-cli-qunit": "^3.1.1",
     "ember-cli-release": "^0.2.9",
-    "ember-cli-shims": "^1.0.2",
     "ember-cli-sass": "^6.1.1",
+    "ember-cli-shims": "^1.0.2",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-test-loader": "^1.1.1",
     "ember-cli-uglify": "^1.2.0",
@@ -57,8 +57,11 @@
     "popover"
   ],
   "dependencies": {
+    "broccoli-funnel": "^1.1.0",
+    "broccoli-merge-trees": "^2.0.0",
+    "ember-cli-babel": "^5.2.1",
     "ember-string-ishtmlsafe-polyfill": "^1.1.0",
-    "ember-cli-babel": "^5.2.1"
+    "tooltipster": "^4.2.2"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",

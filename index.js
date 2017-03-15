@@ -4,6 +4,8 @@
 var path = require('path');
 var util = require('util');
 var extend = util._extend;
+var Funnel = require('broccoli-funnel');
+var mergeTrees = require('broccoli-merge-trees');
 
 var defaultOptions = {
   importTooltipsterDefaultStyles: true,
@@ -14,41 +16,97 @@ var defaultOptions = {
   importTooltipsterShadow: false
 };
 
+function isFastBoot() {
+  return process.env.EMBER_CLI_FASTBOOT === 'true';
+}
+
 module.exports = {
   name: 'ember-cli-tooltipster',
 
-  included: function(parent) {
-    this._super.included(parent);
-    var app;
-    if (parent.app) {
-      app = parent.app;
-    } else {
-      app = parent;
-    }
-    var options = extend(defaultOptions, app.options['ember-cli-tooltipster']);
-    var themesPath = path.join(app.bowerDirectory, 'tooltipster/dist/css/plugins/tooltipster/sideTip/themes/');
+  included: function (app) {
+    this._super.included.apply(this, arguments);
 
-    if (options.importTooltipsterDefaultStyles) {
-      app.import(app.bowerDirectory + '/tooltipster/dist/css/tooltipster.bundle.min.css');
-    }
-    if (options.importTooltipsterBorderless) {
-      app.import(path.join(themesPath, 'tooltipster-sideTip-borderless.min.css'));
-    }
-    if (options.importTooltipsterLight) {
-      app.import(path.join(themesPath, 'tooltipster-sideTip-light.min.css'));
-    }
-    if (options.importTooltipsterNoir) {
-      app.import(path.join(themesPath, 'tooltipster-sideTip-noir.min.css'));
-    }
-    if (options.importTooltipsterPunk) {
-      app.import(path.join(themesPath, 'tooltipster-sideTip-punk.min.css'));
-    }
-    if (options.importTooltipsterShadow) {
-      app.import(path.join(themesPath, 'tooltipster-sideTip-shadow.min.css'));
+    // see: https://github.com/ember-cli/ember-cli/issues/3718
+    while (typeof app.import !== 'function' && app.app) {
+      app = app.app;
     }
 
-    if (!process.env.EMBER_CLI_FASTBOOT) {
-      app.import(app.bowerDirectory + '/tooltipster/dist/js/tooltipster.bundle.min.js');
+    this.app = app;
+    this.tooltipsterOptions = extend(defaultOptions, app.options['ember-cli-tooltipster']);
+
+    if (!isFastBoot()) {
+      this.importDependencies(app);
     }
-  }
+
+    return app;
+  },
+
+  importDependencies(app) {
+    app.import('vendor/tooltipster/tooltipster.bundle.js');
+
+    if (this.tooltipsterOptions.importTooltipsterDefaultStyles) {
+      app.import('vendor/tooltipster/tooltipster.bundle.css');
+    }
+    if (this.tooltipsterOptions.importTooltipsterBorderless) {
+      app.import('vendor/tooltipster/tooltipster-sideTip-borderless.min.css');
+    }
+    if (this.tooltipsterOptions.importTooltipsterLight) {
+      app.import('vendor/tooltipster/tooltipster-sideTip-light.min.css');
+    }
+    if (this.tooltipsterOptions.importTooltipsterNoir) {
+      app.import('vendor/tooltipster/tooltipster-sideTip-noir.min.css');
+    }
+    if (this.tooltipsterOptions.importTooltipsterPunk) {
+      app.import('vendor/tooltipster/tooltipster-sideTip-punk.min.css');
+    }
+    if (this.tooltipsterOptions.importTooltipsterShadow) {
+      app.import('vendor/tooltipster/tooltipster-sideTip-shadow.min.css');
+    }
+  },
+
+  treeForVendor(vendorTree) {
+    var trees = [];
+    var themes = [];
+    var tooltipsterPath = path.dirname(require.resolve('tooltipster'));
+    var tooltipsterCssPath = path.join(this.project.root, 'node_modules', 'tooltipster/dist/css');
+    var tooltipsterThemePath = path.join(this.project.root, 'node_modules', 'tooltipster/dist/css/plugins/tooltipster/sideTip/themes/');
+
+    if (vendorTree) {
+      trees.push(vendorTree);
+    }
+
+    trees.push(new Funnel(tooltipsterPath, {
+      destDir: 'tooltipster',
+      files: ['tooltipster.bundle.js']
+    }));
+
+    if (this.tooltipsterOptions.importTooltipsterDefaultStyles) {
+      trees.push(new Funnel(tooltipsterCssPath, {
+        destDir: 'tooltipster',
+        files: ['tooltipster.bundle.css']
+      }));
+    }
+    if (this.tooltipsterOptions.importTooltipsterBorderless) {
+      themes.push('tooltipster-sideTip-borderless.min.css');
+    }
+    if (this.tooltipsterOptions.importTooltipsterLight) {
+      themes.push('tooltipster-sideTip-light.min.css');
+    }
+    if (this.tooltipsterOptions.importTooltipsterNoir) {
+      themes.push('tooltipster-sideTip-noir.min.css');
+    }
+    if (this.tooltipsterOptions.importTooltipsterPunk) {
+      themes.push('tooltipster-sideTip-punk.min.css');
+    }
+    if (this.tooltipsterOptions.importTooltipsterShadow) {
+      themes.push('tooltipster-sideTip-shadow.min.css');
+    }
+
+    trees.push(new Funnel(tooltipsterThemePath, {
+      destDir: 'tooltipster',
+      files: themes
+    }));
+
+    return mergeTrees(trees);
+  },
 };
