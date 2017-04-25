@@ -137,6 +137,7 @@ export default Ember.Component.extend({
 
   _destroyTooltipster: on('willDestroyElement', function () {
     if (this.$().data('tooltipster-ns')) {
+      this.$().tooltipster('close');
       this.$().tooltipster('destroy');
     }
     this.set('tooltipsterInstance', null);
