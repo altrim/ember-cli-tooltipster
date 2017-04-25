@@ -8,7 +8,7 @@ module.exports = {
   afterInstall: function( /*options*/ ) {
     return this.addPackagesToProject([{
       name: 'tooltipster',
-      target: '4.2.2'
+      target: '4.2.3'
     }]);
   }
 };
