@@ -61,7 +61,7 @@
     "broccoli-merge-trees": "^2.0.0",
     "ember-cli-babel": "^6.0.0",
     "ember-string-ishtmlsafe-polyfill": "^1.1.0",
-    "tooltipster": "^4.2.3"
+    "tooltipster": "^4.2.5"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
