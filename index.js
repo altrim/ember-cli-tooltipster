@@ -6,6 +6,7 @@ var util = require('util');
 var extend = util._extend;
 var Funnel = require('broccoli-funnel');
 var mergeTrees = require('broccoli-merge-trees');
+var map = require('broccoli-stew').map;
 
 var defaultOptions = {
   importTooltipsterDefaultStyles: true,
@@ -15,10 +16,6 @@ var defaultOptions = {
   importTooltipsterPunk: false,
   importTooltipsterShadow: false
 };
-
-function isFastBoot() {
-  return process.env.EMBER_CLI_FASTBOOT === 'true';
-}
 
 module.exports = {
   name: 'ember-cli-tooltipster',
@@ -34,9 +31,7 @@ module.exports = {
     this.app = app;
     this.tooltipsterOptions = extend(defaultOptions, app.options['ember-cli-tooltipster']);
 
-    if (!isFastBoot()) {
-      this.importDependencies(app);
-    }
+    this.importDependencies(app);
 
     return app;
   },
@@ -75,10 +70,14 @@ module.exports = {
       trees.push(vendorTree);
     }
 
-    trees.push(new Funnel(tooltipsterPath, {
+    let tooltipsterTree = new Funnel(tooltipsterPath, {
       destDir: 'tooltipster',
       files: ['tooltipster.bundle.js']
-    }));
+    });
+
+    tooltipsterTree = map(tooltipsterTree, (content) => `if (typeof FastBoot === 'undefined') { ${content} }`);
+
+    trees.push(tooltipsterTree);
 
     if (this.tooltipsterOptions.importTooltipsterDefaultStyles) {
       trees.push(new Funnel(tooltipsterCssPath, {
