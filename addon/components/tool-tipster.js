@@ -1,14 +1,6 @@
 import Ember from 'ember';
 
-const {
-  $,
-  getOwner,
-  isEmpty,
-  merge,
-  observer,
-  on,
-  run
-} = Ember;
+const { $, getOwner, isEmpty, merge, observer, on, run } = Ember;
 
 const { isHTMLSafe } = Ember.String;
 
@@ -60,16 +52,9 @@ export default Ember.Component.extend({
     'zIndex'
   ],
 
-  fnOptions: [
-    'functionInit',
-    'functionBefore',
-    'functionReady',
-    'functionAfter',
-    'functionFormat',
-    'functionPosition'
-  ],
+  fnOptions: ['functionInit', 'functionBefore', 'functionReady', 'functionAfter', 'functionFormat', 'functionPosition'],
 
-  _initializeTooltipster: on('didInsertElement', function () {
+  _initializeTooltipster: on('didInsertElement', function() {
     let options = this._getOptions();
     let componentElement = this.$();
     componentElement.tooltipster(options);
@@ -104,7 +89,7 @@ export default Ember.Component.extend({
       options.content = content.toString();
     }
 
-    this.get('fnOptions').forEach(fn => options[fn] = $.proxy(this[fn], this));
+    this.get('fnOptions').forEach(fn => (options[fn] = $.proxy(this[fn], this)));
 
     if (isEmpty(assign)) {
       const localAddonConfig = merge({}, addonConfig);
@@ -118,12 +103,12 @@ export default Ember.Component.extend({
     let options = {};
     let pluginOptionKeys = this.get('pluginOptions');
     if (!isEmpty(pluginOptionKeys)) {
-      pluginOptionKeys.forEach(pluginOption => options[pluginOption] = this.get(pluginOption));
+      pluginOptionKeys.forEach(pluginOption => (options[pluginOption] = this.get(pluginOption)));
     }
     return options;
   },
 
-  _onContentDidChange: observer('content', 'title', function () {
+  _onContentDidChange: observer('content', 'title', function() {
     run.scheduleOnce('afterRender', this, () => {
       let content = this.get('content') || this.get('title') || null;
       if (isHTMLSafe(content)) {
@@ -135,7 +120,7 @@ export default Ember.Component.extend({
     });
   }),
 
-  _destroyTooltipster: on('willDestroyElement', function () {
+  _destroyTooltipster: on('willDestroyElement', function() {
     if (this.$().data('tooltipster-ns')) {
       this.$().tooltipster('destroy');
     }

@@ -13,7 +13,7 @@
   },
   "repository": "https://github.com/altrim/ember-cli-tooltipster",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": "^4.5 || 6.* || >= 7.*"
   },
   "author": {
     "name": "Altrim Beqiri",
@@ -24,17 +24,17 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.5.0",
     "ember-ajax": "3.0.0",
-    "ember-cli": "2.12.2",
+    "ember-cli": "2.14.2",
     "ember-cli-app-version": "^3.0.0",
-    "ember-cli-dependency-checker": "^1.4.0",
+    "ember-cli-dependency-checker": "^2.0.1",
+    "ember-cli-eslint": "^4.2.0",
     "ember-cli-github-pages": "0.1.2",
-    "ember-cli-htmlbars": "^1.3.0",
-    "ember-cli-htmlbars-inline-precompile": "^0.4.0",
+    "ember-cli-htmlbars": "^2.0.3",
+    "ember-cli-htmlbars-inline-precompile": "^1.0.2",
     "ember-cli-inject-live-reload": "^1.6.1",
-    "ember-cli-jshint": "^2.0.1",
-    "ember-cli-qunit": "^3.1.2",
+    "ember-cli-qunit": "^4.0.0",
     "ember-cli-release": "^0.2.9",
-    "ember-cli-sass": "^6.1.3",
+    "ember-cli-sass": "^7.0.0",
     "ember-cli-shims": "^1.1.0",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-test-loader": "^2.1.0",
@@ -44,9 +44,9 @@
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
-    "ember-paper": "1.0.0-alpha.19",
+    "ember-paper": "^1.0.0-beta.2",
     "ember-resolver": "^4.1.0",
-    "ember-source": "~2.12.1",
+    "ember-source": "^2.14.1",
     "ember-transition-helper": "0.0.6",
     "loader.js": "^4.3.0"
   },
@@ -61,7 +61,7 @@
     "broccoli-merge-trees": "^2.0.0",
     "broccoli-stew": "^1.5.0",
     "ember-cli-babel": "^6.3.0",
-    "ember-string-ishtmlsafe-polyfill": "^1.1.0",
+    "ember-string-ishtmlsafe-polyfill": "^2.0.0",
     "tooltipster": "^4.2.5"
   },
   "ember-addon": {
