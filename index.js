@@ -61,8 +61,8 @@ module.exports = {
     var trees = [];
     var themes = [];
     var tooltipsterPath = path.dirname(require.resolve('tooltipster'));
-    var tooltipsterCssPath = path.join(this.project.root, 'node_modules', 'tooltipster/dist/css');
-    var tooltipsterThemePath = path.join(this.project.root, 'node_modules', 'tooltipster/dist/css/plugins/tooltipster/sideTip/themes/');
+    var tooltipsterCssPath = path.join(tooltipsterPath, '..', 'css');
+    var tooltipsterThemePath = path.join(tooltipsterPath, '..', 'css', 'plugins', 'tooltipster', 'sideTip', 'themes');
 
     if (vendorTree) {
       trees.push(vendorTree);
