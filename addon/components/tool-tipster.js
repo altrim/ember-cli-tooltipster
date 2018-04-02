@@ -71,7 +71,6 @@ export default Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-
     const options = this._getOptions();
     const componentElement = this.$();
     componentElement.tooltipster(options);

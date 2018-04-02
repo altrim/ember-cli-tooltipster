@@ -1,6 +1,7 @@
 //components/ajax-tooltip.js
 import Ember from 'ember';
-const { $, inject } = Ember;
+import $ from 'jquery';
+const { inject } = Ember;
 
 import TooltipsterComponent from 'ember-cli-tooltipster/components/tool-tipster';
 

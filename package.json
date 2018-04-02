@@ -14,7 +14,7 @@
   },
   "repository": "https://github.com/altrim/ember-cli-tooltipster",
   "engines": {
-    "node": "^4.5 || 6.* || >= 7.*"
+    "node": "6.* || >= 7.*"
   },
   "author": {
     "name": "Altrim Beqiri",
