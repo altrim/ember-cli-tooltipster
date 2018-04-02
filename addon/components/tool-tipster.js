@@ -1,69 +1,86 @@
 import Ember from 'ember';
-
-const { $, getOwner, isEmpty, merge, observer, on, run } = Ember;
+import Component from '@ember/component';
+import $ from 'jquery';
+import { getOwner } from '@ember/application';
+import { isEmpty } from '@ember/utils';
+import { merge } from '@ember/polyfills';
+import { observer } from '@ember/object';
+import { run } from '@ember/runloop';
+import { assign } from '@ember/polyfills';
 
 const { isHTMLSafe } = Ember.String;
 
-const assign = Object.assign || Ember.assign;
-
-export default Ember.Component.extend({
+export default Component.extend({
   tooltipsterInstance: null,
 
   attributeBindings: ['title'],
 
   /**
-   * Set how tooltips should be activated and closed.
+   * Set how tooltip should be activated and closed.
    * Default: 'hover'
    * Options: [hover, click]
    * @type {String}
    */
   triggerEvent: 'hover',
 
-  tooltipsterOptions: [
-    'animation',
-    'animationDuration',
-    'arrow',
-    'content',
-    'contentAsHTML',
-    'contentCloning',
-    'debug',
-    'delay',
-    'delayTouch',
-    'distance',
-    'IEmin',
-    'interactive',
-    'maxWidth',
-    'minIntersection',
-    'minWidth',
-    'plugins',
-    'repositionOnScroll',
-    'restoration',
-    'selfDestruction',
-    'side',
-    'timer',
-    'theme',
-    'trackerInterval',
-    'trackOrigin',
-    'trackTooltip',
-    'triggerClose',
-    'triggerOpen',
-    'updateAnimation',
-    'viewportAware',
-    'zIndex'
-  ],
+  init() {
+    this._super(...arguments);
 
-  fnOptions: ['functionInit', 'functionBefore', 'functionReady', 'functionAfter', 'functionFormat', 'functionPosition'],
+    this.set('tooltipsterOptions', [
+      'animation',
+      'animationDuration',
+      'arrow',
+      'content',
+      'contentAsHTML',
+      'contentCloning',
+      'debug',
+      'delay',
+      'delayTouch',
+      'distance',
+      'IEmin',
+      'interactive',
+      'maxWidth',
+      'minIntersection',
+      'minWidth',
+      'plugins',
+      'repositionOnScroll',
+      'restoration',
+      'selfDestruction',
+      'side',
+      'timer',
+      'theme',
+      'trackerInterval',
+      'trackOrigin',
+      'trackTooltip',
+      'triggerClose',
+      'triggerOpen',
+      'updateAnimation',
+      'viewportAware',
+      'zIndex'
+    ]);
 
-  _initializeTooltipster: on('didInsertElement', function() {
-    let options = this._getOptions();
-    let componentElement = this.$();
+    this.set('fnOptions', [
+      'functionInit',
+      'functionBefore',
+      'functionReady',
+      'functionAfter',
+      'functionFormat',
+      'functionPosition'
+    ]);
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+
+    const options = this._getOptions();
+    const componentElement = this.$();
     componentElement.tooltipster(options);
     this.set('tooltipsterInstance', componentElement.tooltipster('instance'));
-  }),
+  },
 
   _getOptions() {
-    let options = this._getStandardOptions();
-    let pluginOptions = this._getPluginOptions();
+    const options = this._getStandardOptions();
+    const pluginOptions = this._getPluginOptions();
 
     for (let option in pluginOptions) {
       options[option] = pluginOptions[option];
@@ -72,9 +89,9 @@ export default Ember.Component.extend({
   },
 
   _getStandardOptions() {
-    let options = {};
+    const options = {};
+    const addonConfig = getOwner(this).resolveRegistration('config:environment')['ember-cli-tooltipster'] || {};
     let content = this.get('content') || this.get('title');
-    let addonConfig = getOwner(this).resolveRegistration('config:environment')['ember-cli-tooltipster'] || {};
 
     this.get('tooltipsterOptions').forEach(option => {
       if (!isEmpty(this.get(option))) {
@@ -100,8 +117,8 @@ export default Ember.Component.extend({
   },
 
   _getPluginOptions() {
-    let options = {};
-    let pluginOptionKeys = this.get('pluginOptions');
+    const options = {};
+    const pluginOptionKeys = this.get('pluginOptions');
     if (!isEmpty(pluginOptionKeys)) {
       pluginOptionKeys.forEach(pluginOption => (options[pluginOption] = this.get(pluginOption)));
     }
@@ -120,11 +137,12 @@ export default Ember.Component.extend({
     });
   }),
 
-  _destroyTooltipster: on('willDestroyElement', function() {
+  willDestroyElement() {
+    this._super(...arguments);
     if (this.$().data('tooltipster-ns')) {
       this.$().tooltipster('destroy');
     }
     this.set('tooltipsterInstance', null);
     this.$().off();
-  })
+  }
 });

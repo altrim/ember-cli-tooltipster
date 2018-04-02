@@ -3,18 +3,19 @@
 import TooltipsterComponent from 'ember-cli-tooltipster/components/tool-tipster';
 
 export default TooltipsterComponent.extend({
-
   tagName: 'button',
 
   classNames: ['my-awesome-button'],
 
   content: 'Following the mouse with plugin',
 
-  plugins: ['follower'],
+  anchor: 'bottom-left',
 
-  pluginOptions: ['offset', 'anchor'],
+  init() {
+    this._super(...arguments);
 
-  offset: [5, 5],
-
-  anchor: 'bottom-left'
+    this.set('plugins', ['follower']);
+    this.set('pluginOptions', ['offset', 'anchor']);
+    this.set('offset', [5, 5]);
+  }
 });

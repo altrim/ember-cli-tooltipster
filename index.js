@@ -2,8 +2,6 @@
 'use strict';
 
 var path = require('path');
-var util = require('util');
-var extend = util._extend;
 var Funnel = require('broccoli-funnel');
 var mergeTrees = require('broccoli-merge-trees');
 var map = require('broccoli-stew').map;
@@ -29,7 +27,7 @@ module.exports = {
     }
 
     this.app = app;
-    this.tooltipsterOptions = extend(defaultOptions, app.options['ember-cli-tooltipster']);
+    this.tooltipsterOptions = Object.assign(defaultOptions, app.options['ember-cli-tooltipster']);
 
     this.importDependencies(app);
 

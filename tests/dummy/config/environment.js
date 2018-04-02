@@ -1,9 +1,9 @@
-/* eslint-env node */
+'use strict';
 
 module.exports = function(environment) {
- var ENV = {
+  let ENV = {
     modulePrefix: 'dummy',
-    environment: environment,
+    environment,
     rootURL: '/',
     locationType: 'hash',
     EmberENV: {
@@ -20,15 +20,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    },
-
-    contentSecurityPolicy: {
-      'script-src': "'self' 'unsafe-eval' *.google.com *.gstatic.com",
-      'style-src': "'self' 'unsafe-inline' *.google.com *.googleapis.com",
-      'font-src': "'self' *.gstatic.com *.googleapis.com",
-      'connect-src': "'self' *.github.com",
-      'img-src': "'self' *.amazonaws.com *.lorempixel.com",
-    },
+    }
   };
 
   if (environment === 'development') {
@@ -48,10 +40,11 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.autoboot = false;
   }
 
   if (environment === 'production') {
-    ENV.rootURL = '/ember-cli-tooltipster';
+    // here you can enable a production-specific feature
   }
 
   return ENV;
