@@ -65,7 +65,7 @@
     "broccoli-merge-trees": "3.0.0",
     "broccoli-stew": "1.5.0",
     "ember-cli-babel": "6.12.0",
-    "ember-string-ishtmlsafe-polyfill": "2.0.0",
+    "ember-string-ishtmlsafe-polyfill": "2.0.2",
     "tooltipster": "4.2.6"
   },
   "ember-addon": {
