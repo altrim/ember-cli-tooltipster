@@ -1,12 +1,12 @@
 /* eslint-env node */
 'use strict';
 
-var path = require('path');
-var Funnel = require('broccoli-funnel');
-var mergeTrees = require('broccoli-merge-trees');
-var map = require('broccoli-stew').map;
+const path = require('path');
+const Funnel = require('broccoli-funnel');
+const mergeTrees = require('broccoli-merge-trees');
+const map = require('broccoli-stew').map;
 
-var defaultOptions = {
+const defaultOptions = {
   importTooltipsterDefaultStyles: true,
   importTooltipsterBorderless: false,
   importTooltipsterLight: false,
@@ -18,7 +18,7 @@ var defaultOptions = {
 module.exports = {
   name: 'ember-cli-tooltipster',
 
-  included: function (app) {
+  included: function(app) {
     this._super.included.apply(this, arguments);
 
     // see: https://github.com/ember-cli/ember-cli/issues/3718
@@ -73,15 +73,17 @@ module.exports = {
       files: ['tooltipster.bundle.js']
     });
 
-    tooltipsterTree = map(tooltipsterTree, (content) => `if (typeof FastBoot === 'undefined') { ${content} }`);
+    tooltipsterTree = map(tooltipsterTree, content => `if (typeof FastBoot === 'undefined') { ${content} }`);
 
     trees.push(tooltipsterTree);
 
     if (this.tooltipsterOptions.importTooltipsterDefaultStyles) {
-      trees.push(new Funnel(tooltipsterCssPath, {
-        destDir: 'tooltipster',
-        files: ['tooltipster.bundle.css']
-      }));
+      trees.push(
+        new Funnel(tooltipsterCssPath, {
+          destDir: 'tooltipster',
+          files: ['tooltipster.bundle.css']
+        })
+      );
     }
     if (this.tooltipsterOptions.importTooltipsterBorderless) {
       themes.push('tooltipster-sideTip-borderless.min.css');
@@ -99,11 +101,13 @@ module.exports = {
       themes.push('tooltipster-sideTip-shadow.min.css');
     }
 
-    trees.push(new Funnel(tooltipsterThemePath, {
-      destDir: 'tooltipster',
-      files: themes
-    }));
+    trees.push(
+      new Funnel(tooltipsterThemePath, {
+        destDir: 'tooltipster',
+        files: themes
+      })
+    );
 
     return mergeTrees(trees);
-  },
+  }
 };

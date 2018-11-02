@@ -100,7 +100,6 @@ export default Component.extend({
 
     options.trigger = this.get('triggerEvent');
 
-    // Handle safe string using ishtmlsafe-polyfill
     if (isHTMLSafe(content)) {
       options.content = content.toString();
     }
