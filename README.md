@@ -1,3 +1,7 @@
+## This repository is no longer maintained. As a replacement check out: https://github.com/sir-dunxalot/ember-tooltips
+
+---
+
 # Ember CLI Tooltipster
 
 An Ember CLI add-on that wraps [Tooltipster](http://iamceege.github.io/tooltipster/) into an ember component.
