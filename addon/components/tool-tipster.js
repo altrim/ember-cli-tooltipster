@@ -137,10 +137,10 @@ export default Component.extend({
 
   willDestroyElement() {
     this._super(...arguments);
-    if (this.$().data('tooltipster-ns')) {
-      this.$().tooltipster('destroy');
+    if (this.element.addEventListener('tooltipster-ns')) {
+      this.element.addEventListener('destroy');
     }
     this.set('tooltipsterInstance', null);
-    this.$().off();
+    this.element.addEventListener();
   }
 });

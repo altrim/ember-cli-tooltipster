@@ -25,7 +25,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@ember/jquery": "^0.5.1",
     "@ember/optional-features": "^0.6.3",
     "broccoli-asset-rev": "^3.0.0",
     "ember-ajax": "4.0.0",
@@ -73,7 +72,6 @@
     "popover"
   ],
   "dependencies": {
-    "@ember/jquery": "^0.5.2",
     "broccoli-funnel": "2.0.1",
     "broccoli-merge-trees": "3.0.1",
     "broccoli-stew": "2.0.1",
